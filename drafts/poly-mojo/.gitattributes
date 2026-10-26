@@ -1,0 +1,3 @@
+# Patch context markers and empty trailing TSV fields are intentional.
+*.patch -whitespace
+*.tsv whitespace=-blank-at-eol

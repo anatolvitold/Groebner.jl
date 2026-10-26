@@ -35,7 +35,8 @@ The following checks were rerun while preparing the fork submission:
 | Optional backends, suite-2 loading, and native reports | 19 |
 | **Total** | **73** |
 
-[Logs](checks/) are retained in this review branch. The new normalization checks
+[Logs](checks/) are retained in this review branch with terminal control codes
+removed; recorded timings and assertions are unchanged. The new normalization checks
 accept rational and finite-field scalar multiples while rejecting changed
 polynomials, missing or duplicated elements, different fields, and variable
 orders. Default strict comparison continues to reject rescaling.

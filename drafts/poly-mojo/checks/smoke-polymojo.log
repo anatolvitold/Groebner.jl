@@ -1,17 +1,26 @@
   Activating project at `/workspace/groebner-comparison/.local/environment`
 [ Info: Loading benchmark models..
-Running benchmarks   0%|                                |  ETA: N/A[K
-   Active: dummy 2[K
-     Time: 1.0 / 70.0 s[K[A[A
 
-[K[A[K[ARunning benchmarks 100%|████████████████████████████████| Time: 0:00:01[K
-   Active: [K
-     Time: 1.0 / -156544.0 s[K
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 1.0 / 70.0 s
 
 
-[K[A[K[ARunning benchmarks 100%|████████████████████████████████| Time: 0:00:01[K
-   Active: [K
-     Time: 1.0 / -156544.0 s[K
+
+
+
+
+Running benchmarks 100%|████████████████████████████████| Time: 0:00:01
+   Active:
+     Time: 1.0 / -156544.0 s
+
+
+
+
+
+Running benchmarks 100%|████████████████████████████████| Time: 0:00:01
+   Active:
+     Time: 1.0 / -156544.0 s
 Timestamp: 2026-10-26T09:28:58.332
 [ Info: Re-generating the folder with benchmarks
 ┌ Info: Benchmarking polymojo.
