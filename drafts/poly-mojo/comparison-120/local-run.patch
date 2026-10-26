@@ -1,0 +1,241 @@
+diff --git a/scripts/benchmark_different_software/generate/singular/run_in_singular.jl b/scripts/benchmark_different_software/generate/singular/run_in_singular.jl
+index 1a6c4ba..85fe0a8 100644
+--- a/scripts/benchmark_different_software/generate/singular/run_in_singular.jl
++++ b/scripts/benchmark_different_software/generate/singular/run_in_singular.jl
+@@ -42,7 +42,7 @@ function aa_system_to_singular(system)
+         R_s, _ = Singular.polynomial_ring(
+             ground_s,
+             map(string, symbols(R)),
+-            internal_ordering=:degrevlex
++            ordering=:degrevlex
+         )
+         system_s = map(
+             f -> AbstractAlgebra.change_base_ring(
+@@ -57,7 +57,7 @@ function aa_system_to_singular(system)
+         R_s, _ = Singular.polynomial_ring(
+             ground_s,
+             map(string, symbols(R)),
+-            internal_ordering=:degrevlex
++            ordering=:degrevlex
+         )
+         system_s = map(
+             f -> AbstractAlgebra.change_base_ring(
+diff --git a/scripts/benchmark_different_software/generate/utils.jl b/scripts/benchmark_different_software/generate/utils.jl
+index 3ce867d..6db8341 100644
+--- a/scripts/benchmark_different_software/generate/utils.jl
++++ b/scripts/benchmark_different_software/generate/utils.jl
+@@ -2,7 +2,7 @@
+ using Printf
+ 
+ # Benchmark results directory
+-const BENCHMARK_RESULTS = "results"
++const BENCHMARK_RESULTS = get(ENV, "BENCHMARK_RESULTS", "results")
+ # Directory with data necessary for validating benchmark results
+ const BENCHMARK_VALIDATE = "validate"
+ # Table with results is written to file..
+diff --git a/scripts/benchmark_different_software/one_script_to_run_them_all.jl b/scripts/benchmark_different_software/one_script_to_run_them_all.jl
+index 0ea49c1..6f30bc7 100644
+--- a/scripts/benchmark_different_software/one_script_to_run_them_all.jl
++++ b/scripts/benchmark_different_software/one_script_to_run_them_all.jl
+@@ -1,6 +1,7 @@
+ # Activate the environment and add all required packages
+ import Pkg
+ include("generate/utils.jl")
++include("../../.local/run_support.jl")
+ julia_pkg_preamble("$(@__DIR__)")
+ 
+ # Load the packages
+@@ -30,7 +31,7 @@ global_logger(Logging.ConsoleLogger(stdout, Logging.Info))
+ # Set the properties of progress bars
+ const _progressbar_color = :light_green
+ const _progressbar_value_color = :light_green
+-progressbar_enabled() = Logging.Info <= Logging.min_enabled_level(current_logger()) < Logging.Warn
++progressbar_enabled() = get(ENV, "BENCHMARK_PROGRESS", "yes") != "no" && Logging.Info <= Logging.min_enabled_level(current_logger()) < Logging.Warn
+ 
+ const _available_backends = ["groebner", "singular", "maplefgb", "mgb", "msolve", "openf4", "polymojo", "polymojocertified"]
+ 
+@@ -358,6 +359,9 @@ function run_benchmarks(args)
+     running = []
+     errored = []
+     timedout = []
++    memory_limited = []
++    status_path = joinpath(benchmark_dir, "status.tsv")
++    write(status_path, "problem\tstatus\twall_seconds\tpeak_rss_bytes\texit_code\tsignal\n")
+ 
+     global_start_time = time_ns()
+ 
+@@ -387,6 +391,7 @@ function run_benchmarks(args)
+         enabled=progressbar_enabled(),
+         color=_progressbar_color
+     )
++    try
+     while true
+         if !isempty(queue) && length(running) < nworkers
+             task = pop!(queue)
+@@ -403,7 +408,7 @@ function run_benchmarks(args)
+                 validate,
+                 args
+             )
+-            cmd = Cmd(cmd, ignorestatus=true, detach=false, env=copy(ENV))
++            cmd = Cmd(cmd, ignorestatus=true, detach=true, env=copy(ENV))
+             proc = run(pipeline(cmd, stdout=log_file, stderr=log_file), wait=false)
+             push!(
+                 processes,
+@@ -412,10 +417,14 @@ function run_benchmarks(args)
+                     problem_name=problem_name,
+                     julia_process=proc,
+                     start_time=time_ns(),
+-                    logfile=log_file
++                    logfile=log_file,
++                    pid=getpid(proc),
++                    peak_rss=Ref(0)
+                 )
+             )
+             push!(running, processes[end])
++            @info "Case started" backend problem_name pid=getpid(proc)
++            flush(stdout)
+             next!(
+                 prog,
+                 showvalues = generate_showvalues(running),
+@@ -434,6 +443,8 @@ function run_benchmarks(args)
+                 if proc.julia_process.exitcode != 0
+                     push!(errored, proc)
+                 end
++                stop_process_group(proc)
++                record_case(status_path, proc, proc.julia_process.exitcode == 0 ? "completed" : "error")
+                 close(proc.logfile)
+                 # close(proc.errfile)
+                 start_time = proc.start_time
+@@ -446,12 +457,15 @@ function run_benchmarks(args)
+             end
+             if process_running(proc.julia_process)
+                 start_time = proc.start_time
+-                if seconds_passed(start_time) > timeout
++                proc.peak_rss[] = max(proc.peak_rss[], process_group_rss(proc.pid))
++                over_memory = proc.peak_rss[] > RUN_MEMORY_LIMIT
++                if seconds_passed(start_time) > timeout || over_memory
+                     push!(to_be_removed, i)
+-                    kill(proc.julia_process, Base.SIGKILL)
++                    stop_process_group(proc)
++                    record_case(status_path, proc, over_memory ? "memory-limit" : "timeout")
+                     close(proc.logfile)
+                     # close(proc.errfile)
+-                    push!(timedout, proc)
++                    push!(over_memory ? memory_limited : timedout, proc)
+                     next!(
+                         prog,
+                         showvalues = generate_showvalues(running),
+@@ -474,8 +488,20 @@ function run_benchmarks(args)
+             break
+         end
+     end
++    finally
++        for proc in processes
++            if process_running(proc.julia_process)
++                stop_process_group(proc)
++                close(proc.logfile)
++            end
++        end
++    end
+     finish!(prog)
+ 
++    if !isempty(memory_limited)
++        println("Memory limit: ", join([p.problem_name for p in memory_limited], ", "))
++    end
++
+     if !isempty(timedout)
+         printstyled("(!) Timed-out:\n", color=:light_yellow)
+         for proc in timedout
+@@ -501,91 +527,7 @@ function run_benchmarks(args)
+ end
+ 
+ function validate_results(args, problem_names)
+-    println()
+-    backend = args["backend"]
+-    if !(args["validate"] in ["yes", "update"])
+-        @info "Skipping result validation for $backend"
+-        return nothing
+-    end
+-
+-    update_certificates = args["validate"] == "update"
+-
+-    benchmark_id = args["suite"]
+-    benchmark_dir = (@__DIR__) * "/" * get_benchmark_dir(backend, benchmark_id)
+-    validate_dir = (@__DIR__) * "/" * get_validate_dir(benchmark_id)
+-
+-    @info """Validating results for $backend. May take some time.
+-    Directory with the certificates is $validate_dir
+-    """
+-
+-    if update_certificates
+-        @info "Re-generating the folder with certificates"
+-        try
+-            if isdir(validate_dir)
+-                rm(validate_dir, recursive=true, force=true)
+-            end
+-        catch err
+-            @info "Something went wrong when deleting the directory with certificates"
+-            showerror(stdout, err)
+-            println(stdout)
+-        end
+-    end
+-
+-    for problem_name in problem_names
+-        print("$problem_name:")
+-        problem_validate_path = "$validate_dir/$problem_name/$(certificate_filename())"
+-        problem_result_path = "$benchmark_dir/$problem_name/$(output_filename())"
+-        true_result_exists, true_result = false, nothing
+-        result_exists, result = false, nothing
+-        try
+-            result_file = open(problem_result_path, "r")
+-            result = read(result_file, String)
+-            result_exists = true
+-            if isempty(string(strip(result, [' ', '\n', '\r'])))
+-                result_exists = false
+-            end
+-        catch e
+-            @debug "Cannot collect result data for $name"
+-        end
+-        if !result_exists
+-            printstyled("\tMISSING RESULT\n", color=:light_yellow)
+-            continue
+-        end
+-        try
+-            true_result_file = open(problem_validate_path, "r")
+-            true_result = read(true_result_file, String)
+-            true_result = standardize_certificate(true_result)
+-            true_result_exists = true
+-        catch e
+-            @debug "Cannot collect validation data for $name"
+-            printstyled("\tMISSING CERTIFICATE...", color=:light_yellow)
+-        end
+-        # At this point, the recently computed basis is stored in `result`
+-        @assert result_exists
+-        success, result_validation_certificate = compute_basis_validation_certificate(result)
+-        if !success
+-            @warn "Bad file encountered at $problem_result_path. Skipping"
+-            continue
+-        end
+-        if update_certificates || !true_result_exists
+-            mkpath("$validate_dir/$problem_name/")
+-            true_result_file = open(problem_validate_path, "w")
+-            println(true_result_file, result_validation_certificate)
+-            printstyled("\tUPDATED\n", color=:light_green)
+-            continue
+-        end
+-        @assert result_exists && true_result_exists
+-        @assert is_certificate_standardized(result_validation_certificate)
+-        @assert is_certificate_standardized(true_result)
+-        if result_validation_certificate != true_result
+-            printstyled("\tWRONG\n", color=:light_red)
+-            println("True certificate:\n$true_result")
+-            println("Current certificate:\n$result_validation_certificate")
+-        else
+-            printstyled("\tOK\n", color=:light_green)
+-        end
+-    end
+-
++    @info "Complete-basis comparison will run after all timed backends finish."
+     nothing
+ end
+ 

@@ -1,0 +1,68 @@
+{
+  "created_utc": "2026-10-25T19:08:31.976074+00:00",
+  "source_commit": "aa1a0d617c54336d7867aef494647f657b147a86",
+  "poly_mojo_commit": "72c92234ba9f0b85a7d8d4476ccb61cb6573716e",
+  "suites": [
+    1,
+    2,
+    3
+  ],
+  "backends": [
+    "polymojo",
+    "groebner",
+    "msolve",
+    "singular"
+  ],
+  "runs": 3,
+  "workers": 1,
+  "timeout_seconds": 120,
+  "upstream_grace_seconds": 10,
+  "deadline_scope": "whole case process including load/JIT, warm-up, three measured repetitions, and output",
+  "memory_guard_bytes": 17179869184,
+  "memory_guard_method": "process-group summed RSS sampled every 0.2 seconds; not a hard allocation limit",
+  "threads": {
+    "JULIA_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1,
+    "groebner_tasks": 1,
+    "msolve_default_threads": 1
+  },
+  "cgroup_cpu_max": "400000 100000",
+  "cgroup_memory_max": "34359738368",
+  "versions": {
+    "Julia": "1.10.2",
+    "Mojo": "1.2.0 (2016d0cd)",
+    "Groebner.jl": "0.10.12",
+    "Singular.jl": "0.28.19",
+    "Singular_jll": "404.101.510+0",
+    "msolve": "0.11.0",
+    "Nemo": "0.57.1"
+  },
+  "driver": "/workspace/groebner-contribution/scripts/benchmark_different_software/results/polymojo-build/80dff17dfaa10e22dd43c24f/driver",
+  "driver_sha256": "606f2f88baf75716fc6468601690dd0a81c86f0d4b920a1e5566dcb73d59b082",
+  "timing": "minimum of three; one untimed warm-up for Julia and Poly Mojo; msolve uses three fresh processes including startup, parsing and output",
+  "validation": "after timed passes, compare complete output bases after monic normalization and sorting; certified mode excluded",
+  "release_status": "source build; published Poly Mojo package pin pending",
+  "previous_run": "The stopped 60-second run is preserved separately and is not mixed into these measurements.",
+  "memory_events_before": "low 0\nhigh 0\nmax 10137\noom 4\noom_kill 2\noom_group_kill 0\n",
+  "release_note": "GitHub v1.0.1 was published during this run at 650780c9335bc5687bb864a0778f242d6abbdf2f. Its src/, scripts/, and pixi.lock are identical to the benchmark source commit. The benchmark continues with its original binary and dependency environment; channel package publication is pending.",
+  "finished_utc": "2026-10-26T02:03:54.421204+00:00",
+  "driver_sha256_after": "606f2f88baf75716fc6468601690dd0a81c86f0d4b920a1e5566dcb73d59b082",
+  "memory_events_after": "low 0\nhigh 0\nmax 10137\noom 4\noom_kill 2\noom_group_kill 0\n",
+  "validation_hash_fix": "Changed Julia SHA input from String/CodeUnits to an equivalent byte vector after large-output checks hit the validation deadline. Digests are identical; validated against Python hashlib. Only interrupted output checks were repeated. All benchmark timings remain unchanged.",
+  "rechecked_cases": [
+    [
+      "1",
+      "katsura 10"
+    ],
+    [
+      "1",
+      "katsura 11"
+    ],
+    [
+      "1",
+      "katsura 12"
+    ]
+  ],
+  "validation_finished_utc": "2026-10-26T02:06:16.708656+00:00"
+}

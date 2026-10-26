@@ -1,0 +1,65 @@
+[
+  {
+    "suite": 1,
+    "competitor": "groebner",
+    "shared_cases": 20,
+    "poly_mojo_faster": 13,
+    "geometric_mean_competitor_over_poly": 1.0297367848090782
+  },
+  {
+    "suite": 1,
+    "competitor": "singular",
+    "shared_cases": 9,
+    "poly_mojo_faster": 9,
+    "geometric_mean_competitor_over_poly": 14.933326527218808
+  },
+  {
+    "suite": 1,
+    "competitor": "msolve",
+    "shared_cases": 20,
+    "poly_mojo_faster": 18,
+    "geometric_mean_competitor_over_poly": 1.9197508696423577
+  },
+  {
+    "suite": 2,
+    "competitor": "groebner",
+    "shared_cases": 19,
+    "poly_mojo_faster": 9,
+    "geometric_mean_competitor_over_poly": 0.9747069642287065
+  },
+  {
+    "suite": 2,
+    "competitor": "singular",
+    "shared_cases": 7,
+    "poly_mojo_faster": 7,
+    "geometric_mean_competitor_over_poly": 24.96492398415639
+  },
+  {
+    "suite": 2,
+    "competitor": "msolve",
+    "shared_cases": 19,
+    "poly_mojo_faster": 19,
+    "geometric_mean_competitor_over_poly": 3.0462318450401997
+  },
+  {
+    "suite": 3,
+    "competitor": "groebner",
+    "shared_cases": 16,
+    "poly_mojo_faster": 16,
+    "geometric_mean_competitor_over_poly": 3.5005383393535277
+  },
+  {
+    "suite": 3,
+    "competitor": "singular",
+    "shared_cases": 5,
+    "poly_mojo_faster": 5,
+    "geometric_mean_competitor_over_poly": 13.37413236092565
+  },
+  {
+    "suite": 3,
+    "competitor": "msolve",
+    "shared_cases": 17,
+    "poly_mojo_faster": 17,
+    "geometric_mean_competitor_over_poly": 3.57982885332897
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "competitor": "groebner",
+    "both_completed": 58,
+    "only_poly_mojo_completed": 3,
+    "only_competitor_completed": 5,
+    "neither_completed": 20
+  },
+  {
+    "competitor": "singular",
+    "both_completed": 24,
+    "only_poly_mojo_completed": 37,
+    "only_competitor_completed": 2,
+    "neither_completed": 23
+  },
+  {
+    "competitor": "msolve",
+    "both_completed": 59,
+    "only_poly_mojo_completed": 2,
+    "only_competitor_completed": 5,
+    "neither_completed": 20
+  }
+]

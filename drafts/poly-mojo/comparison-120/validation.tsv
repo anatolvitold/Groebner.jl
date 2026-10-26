@@ -1,0 +1,345 @@
+suite	problem	backend	run_status	validation	reference	basis_count	canonical_sha256
+1	dummy	groebner	completed	full-basis-match	groebner	2	7c59617b347308ac9482e355933e5e05f4aa11be6fb74a19e3cca1d95b28434b
+1	dummy	singular	completed	full-basis-match	groebner	2	7c59617b347308ac9482e355933e5e05f4aa11be6fb74a19e3cca1d95b28434b
+1	dummy	msolve	completed	full-basis-match	groebner	2	7c59617b347308ac9482e355933e5e05f4aa11be6fb74a19e3cca1d95b28434b
+1	dummy	polymojo	completed	full-basis-match	groebner	2	7c59617b347308ac9482e355933e5e05f4aa11be6fb74a19e3cca1d95b28434b
+1	cyclic 7	groebner	completed	full-basis-match	groebner	209	c2df2852f9f030f2eb752a6d4199da75f7222344a5cb0b923543f8b3157dc706
+1	cyclic 7	singular	completed	full-basis-match	groebner	209	c2df2852f9f030f2eb752a6d4199da75f7222344a5cb0b923543f8b3157dc706
+1	cyclic 7	msolve	completed	full-basis-match	groebner	209	c2df2852f9f030f2eb752a6d4199da75f7222344a5cb0b923543f8b3157dc706
+1	cyclic 7	polymojo	completed	full-basis-match	groebner	209	c2df2852f9f030f2eb752a6d4199da75f7222344a5cb0b923543f8b3157dc706
+1	cyclic 8	groebner	completed	full-basis-match	groebner	372	bc5399d2429b01de610bff190d69810701a1a95cf2767090da6679ff10b52b81
+1	cyclic 8	singular	timeout	not-completed	groebner		
+1	cyclic 8	msolve	completed	full-basis-match	groebner	372	bc5399d2429b01de610bff190d69810701a1a95cf2767090da6679ff10b52b81
+1	cyclic 8	polymojo	completed	full-basis-match	groebner	372	bc5399d2429b01de610bff190d69810701a1a95cf2767090da6679ff10b52b81
+1	cyclic 9	groebner	timeout	not-completed			
+1	cyclic 9	singular	timeout	not-completed			
+1	cyclic 9	msolve	timeout	not-completed			
+1	cyclic 9	polymojo	timeout	not-completed			
+1	katsura 10	groebner	completed	full-basis-match	groebner	537	2b8b44082d1e6e876dc4a8aa80ce694c210b56ec6cc50855f629dbf9971af27c
+1	katsura 10	singular	timeout	not-completed			
+1	katsura 10	msolve	completed	full-basis-match	groebner	537	2b8b44082d1e6e876dc4a8aa80ce694c210b56ec6cc50855f629dbf9971af27c
+1	katsura 10	polymojo	completed	full-basis-match	groebner	537	2b8b44082d1e6e876dc4a8aa80ce694c210b56ec6cc50855f629dbf9971af27c
+1	katsura 11	groebner	completed	full-basis-match	groebner	1050	7515e500c30123afe3c96da39da082a195730ca936aae3cb386e5750c0463d24
+1	katsura 11	singular	timeout	not-completed			
+1	katsura 11	msolve	completed	full-basis-match	groebner	1050	7515e500c30123afe3c96da39da082a195730ca936aae3cb386e5750c0463d24
+1	katsura 11	polymojo	completed	full-basis-match	groebner	1050	7515e500c30123afe3c96da39da082a195730ca936aae3cb386e5750c0463d24
+1	katsura 12	groebner	timeout	not-completed			
+1	katsura 12	singular	timeout	not-completed			
+1	katsura 12	msolve	completed	no-cross-check	msolve	2091	4857c9c8506336483574fbc0e255ec1d00a931274e187c5fa4ef954cf298d0f4
+1	katsura 12	polymojo	timeout	not-completed			
+1	katsura 13	groebner	timeout	not-completed			
+1	katsura 13	singular	timeout	not-completed			
+1	katsura 13	msolve	timeout	not-completed			
+1	katsura 13	polymojo	timeout	not-completed			
+1	eco 11	groebner	completed	full-basis-match	groebner	389	01675db27797b717fa5c2a2e5cc10f9af515b2ec7cb4bc7108c425b63c02761f
+1	eco 11	singular	timeout	not-completed	groebner		
+1	eco 11	msolve	completed	full-basis-match	groebner	389	01675db27797b717fa5c2a2e5cc10f9af515b2ec7cb4bc7108c425b63c02761f
+1	eco 11	polymojo	completed	full-basis-match	groebner	389	01675db27797b717fa5c2a2e5cc10f9af515b2ec7cb4bc7108c425b63c02761f
+1	eco 12	groebner	completed	full-basis-match	groebner	743	4e644b02ac8fcd9567b2aab8d1755dbbd199f37ca134f6851c0b801c8083d70d
+1	eco 12	singular	timeout	not-completed	groebner		
+1	eco 12	msolve	completed	full-basis-match	groebner	743	4e644b02ac8fcd9567b2aab8d1755dbbd199f37ca134f6851c0b801c8083d70d
+1	eco 12	polymojo	completed	full-basis-match	groebner	743	4e644b02ac8fcd9567b2aab8d1755dbbd199f37ca134f6851c0b801c8083d70d
+1	eco 13	groebner	completed	full-basis-match	groebner	1465	6bb6079c26475b59388dba30e5fb25b8c4d292e1ebecb6f89bb60202532e5a9c
+1	eco 13	singular	timeout	not-completed	groebner		
+1	eco 13	msolve	completed	full-basis-match	groebner	1465	6bb6079c26475b59388dba30e5fb25b8c4d292e1ebecb6f89bb60202532e5a9c
+1	eco 13	polymojo	completed	full-basis-match	groebner	1465	6bb6079c26475b59388dba30e5fb25b8c4d292e1ebecb6f89bb60202532e5a9c
+1	eco 14	groebner	timeout	not-completed			
+1	eco 14	singular	timeout	not-completed			
+1	eco 14	msolve	timeout	not-completed			
+1	eco 14	polymojo	timeout	not-completed			
+1	noon 7	groebner	completed	full-basis-match	groebner	495	f724c9985ba62777d19f54c8d51676f075f06674cc63f9553626f29241e6fb0a
+1	noon 7	singular	completed	full-basis-match	groebner	495	f724c9985ba62777d19f54c8d51676f075f06674cc63f9553626f29241e6fb0a
+1	noon 7	msolve	completed	full-basis-match	groebner	495	f724c9985ba62777d19f54c8d51676f075f06674cc63f9553626f29241e6fb0a
+1	noon 7	polymojo	completed	full-basis-match	groebner	495	f724c9985ba62777d19f54c8d51676f075f06674cc63f9553626f29241e6fb0a
+1	noon 8	groebner	completed	full-basis-match	groebner	1338	2220b4565b3bc8c628a0953f5a7463ca0336736cd52a2a64d6a57626745e4d05
+1	noon 8	singular	completed	full-basis-match	groebner	1338	2220b4565b3bc8c628a0953f5a7463ca0336736cd52a2a64d6a57626745e4d05
+1	noon 8	msolve	completed	full-basis-match	groebner	1338	2220b4565b3bc8c628a0953f5a7463ca0336736cd52a2a64d6a57626745e4d05
+1	noon 8	polymojo	completed	full-basis-match	groebner	1338	2220b4565b3bc8c628a0953f5a7463ca0336736cd52a2a64d6a57626745e4d05
+1	noon 9	groebner	completed	full-basis-match	groebner	3682	41560853f6cafa0e5ffbfa20486df10afc20f83e375b6368e6b6362044af29ef
+1	noon 9	singular	timeout	not-completed	groebner		
+1	noon 9	msolve	completed	full-basis-match	groebner	3682	41560853f6cafa0e5ffbfa20486df10afc20f83e375b6368e6b6362044af29ef
+1	noon 9	polymojo	completed	full-basis-match	groebner	3682	41560853f6cafa0e5ffbfa20486df10afc20f83e375b6368e6b6362044af29ef
+1	noon 10	groebner	timeout	not-completed			
+1	noon 10	singular	timeout	not-completed			
+1	noon 10	msolve	timeout	not-completed			
+1	noon 10	polymojo	timeout	not-completed			
+1	henrion 5	groebner	completed	full-basis-match	groebner	33	3f8500582fc9ccd1e2af546cd371c9a09ac983441aa1566979ac9d84dd5c2798
+1	henrion 5	singular	completed	full-basis-match	groebner	33	3f8500582fc9ccd1e2af546cd371c9a09ac983441aa1566979ac9d84dd5c2798
+1	henrion 5	msolve	completed	full-basis-match	groebner	33	3f8500582fc9ccd1e2af546cd371c9a09ac983441aa1566979ac9d84dd5c2798
+1	henrion 5	polymojo	completed	full-basis-match	groebner	33	3f8500582fc9ccd1e2af546cd371c9a09ac983441aa1566979ac9d84dd5c2798
+1	henrion 6	groebner	completed	full-basis-match	groebner	90	32631179b96ef5122e14ab977ab9ead253a8f23e73c034899fb80e71becf6b49
+1	henrion 6	singular	completed	full-basis-match	groebner	90	32631179b96ef5122e14ab977ab9ead253a8f23e73c034899fb80e71becf6b49
+1	henrion 6	msolve	completed	full-basis-match	groebner	90	32631179b96ef5122e14ab977ab9ead253a8f23e73c034899fb80e71becf6b49
+1	henrion 6	polymojo	completed	full-basis-match	groebner	90	32631179b96ef5122e14ab977ab9ead253a8f23e73c034899fb80e71becf6b49
+1	henrion 7	groebner	completed	full-basis-match	groebner	415	c3c34aeebb342f9b2818ca6c9315fdf009efa72b417daae7483ba09440cc4880
+1	henrion 7	singular	timeout	not-completed	groebner		
+1	henrion 7	msolve	completed	full-basis-match	groebner	415	c3c34aeebb342f9b2818ca6c9315fdf009efa72b417daae7483ba09440cc4880
+1	henrion 7	polymojo	completed	full-basis-match	groebner	415	c3c34aeebb342f9b2818ca6c9315fdf009efa72b417daae7483ba09440cc4880
+1	henrion 8	groebner	timeout	not-completed			
+1	henrion 8	singular	timeout	not-completed			
+1	henrion 8	msolve	timeout	not-completed			
+1	henrion 8	polymojo	timeout	not-completed			
+1	reimer 6	groebner	completed	full-basis-match	groebner	95	5dfe2e9528df44d51593046bb8093db78c3f94c63a0c0f58a6678961fdd74870
+1	reimer 6	singular	completed	full-basis-match	groebner	95	5dfe2e9528df44d51593046bb8093db78c3f94c63a0c0f58a6678961fdd74870
+1	reimer 6	msolve	completed	full-basis-match	groebner	95	5dfe2e9528df44d51593046bb8093db78c3f94c63a0c0f58a6678961fdd74870
+1	reimer 6	polymojo	completed	full-basis-match	groebner	95	5dfe2e9528df44d51593046bb8093db78c3f94c63a0c0f58a6678961fdd74870
+1	reimer 7	groebner	completed	full-basis-match	groebner	227	8098a0e278561373838b7b6dc9d8e1b5b730cd173a86c13ad45983eb32d9624f
+1	reimer 7	singular	timeout	not-completed	groebner		
+1	reimer 7	msolve	completed	full-basis-match	groebner	227	8098a0e278561373838b7b6dc9d8e1b5b730cd173a86c13ad45983eb32d9624f
+1	reimer 7	polymojo	completed	full-basis-match	groebner	227	8098a0e278561373838b7b6dc9d8e1b5b730cd173a86c13ad45983eb32d9624f
+1	reimer 8	groebner	completed	full-basis-match	groebner	612	a468b079f6f74a0e9e433abc91c2d00138d50183524fae6ac543084508b026c6
+1	reimer 8	singular	timeout	not-completed	groebner		
+1	reimer 8	msolve	completed	full-basis-match	groebner	612	a468b079f6f74a0e9e433abc91c2d00138d50183524fae6ac543084508b026c6
+1	reimer 8	polymojo	completed	full-basis-match	groebner	612	a468b079f6f74a0e9e433abc91c2d00138d50183524fae6ac543084508b026c6
+1	Cholera	groebner	completed	no-cross-check	groebner	44	6d4d0b0219491c9f2b02fd1a004c39f3475d6ba77f584394700bd77db231152d
+1	Cholera	singular	timeout	not-completed	groebner		
+1	Cholera	msolve	timeout	not-completed	groebner		
+1	Cholera	polymojo	timeout	not-completed	groebner		
+1	HIV2	groebner	completed	full-basis-match	groebner	55	45aea44157223f97dc15456344f3a52f8dd77e934de6aae07b12fbc6645df0e7
+1	HIV2	singular	timeout	not-completed	groebner		
+1	HIV2	msolve	completed	full-basis-match	groebner	55	45aea44157223f97dc15456344f3a52f8dd77e934de6aae07b12fbc6645df0e7
+1	HIV2	polymojo	timeout	not-completed	groebner		
+1	NFkB (w.)	groebner	timeout	not-completed			
+1	NFkB (w.)	singular	timeout	not-completed			
+1	NFkB (w.)	msolve	timeout	not-completed			
+1	NFkB (w.)	polymojo	timeout	not-completed			
+1	Goodwin (w.)	groebner	timeout	not-completed			
+1	Goodwin (w.)	singular	timeout	not-completed			
+1	Goodwin (w.)	msolve	timeout	not-completed			
+1	Goodwin (w.)	polymojo	timeout	not-completed			
+1	yang1	groebner	completed	full-basis-match	groebner	4761	9a259b5a3972d3e3f78a0ba2ecb35baf8abe347344b7a7a4000790677ea1f151
+1	yang1	singular	timeout	not-completed	groebner		
+1	yang1	msolve	completed	full-basis-match	groebner	4761	9a259b5a3972d3e3f78a0ba2ecb35baf8abe347344b7a7a4000790677ea1f151
+1	yang1	polymojo	timeout	not-completed	groebner		
+1	bayes148	groebner	completed	full-basis-match	groebner	3626	40c8947c01efc31823873ebda05861828f1a99b68a857e376bb69e5ac801e2d8
+1	bayes148	singular	completed	full-basis-match	groebner	3626	40c8947c01efc31823873ebda05861828f1a99b68a857e376bb69e5ac801e2d8
+1	bayes148	msolve	completed	full-basis-match	groebner	3626	40c8947c01efc31823873ebda05861828f1a99b68a857e376bb69e5ac801e2d8
+1	bayes148	polymojo	timeout	not-completed	groebner		
+1	gametwo2	groebner	completed	full-basis-match	groebner	1553	8a70dc1dcd02effcc931e42ec33a46b3ed7d84ff90c09f28adbf522402ab8256
+1	gametwo2	singular	timeout	not-completed	groebner		
+1	gametwo2	msolve	completed	full-basis-match	groebner	1553	8a70dc1dcd02effcc931e42ec33a46b3ed7d84ff90c09f28adbf522402ab8256
+1	gametwo2	polymojo	completed	full-basis-match	groebner	1553	8a70dc1dcd02effcc931e42ec33a46b3ed7d84ff90c09f28adbf522402ab8256
+1	jason210	groebner	completed	full-basis-match	groebner	900	1f8d8697e3511f1284f51af6a4c858e43dc5b2aa000dcbc2a68f13b216b68bcd
+1	jason210	singular	completed	full-basis-match	groebner	900	1f8d8697e3511f1284f51af6a4c858e43dc5b2aa000dcbc2a68f13b216b68bcd
+1	jason210	msolve	completed	full-basis-match	groebner	900	1f8d8697e3511f1284f51af6a4c858e43dc5b2aa000dcbc2a68f13b216b68bcd
+1	jason210	polymojo	completed	full-basis-match	groebner	900	1f8d8697e3511f1284f51af6a4c858e43dc5b2aa000dcbc2a68f13b216b68bcd
+1	alea6	groebner	completed	full-basis-match	groebner	196	5ba1a7e788b5253ed96a15012917783df7b2282b5ea5bea015051bf915754076
+1	alea6	singular	completed	full-basis-match	groebner	196	5ba1a7e788b5253ed96a15012917783df7b2282b5ea5bea015051bf915754076
+1	alea6	msolve	completed	full-basis-match	groebner	196	5ba1a7e788b5253ed96a15012917783df7b2282b5ea5bea015051bf915754076
+1	alea6	polymojo	completed	full-basis-match	groebner	196	5ba1a7e788b5253ed96a15012917783df7b2282b5ea5bea015051bf915754076
+1	mayr42	groebner	timeout	not-completed			
+1	mayr42	singular	timeout	not-completed			
+1	mayr42	msolve	timeout	not-completed			
+1	mayr42	polymojo	timeout	not-completed			
+1	BIOMD0000000103	groebner	completed	full-basis-match	groebner	301	1e829f2548f45743411d52aacfd96e70716da97710fc0ba6c95a1bc656a78751
+1	BIOMD0000000103	singular	completed	full-basis-match	groebner	301	1e829f2548f45743411d52aacfd96e70716da97710fc0ba6c95a1bc656a78751
+1	BIOMD0000000103	msolve	completed	full-basis-match	groebner	301	1e829f2548f45743411d52aacfd96e70716da97710fc0ba6c95a1bc656a78751
+1	BIOMD0000000103	polymojo	timeout	not-completed	groebner		
+1	BIOMD0000000123	groebner	completed	full-basis-match	groebner	58	66141cb10979e2f539d2e82b92ba16e337becd3faffa0818ef073e2a0c13e1cb
+1	BIOMD0000000123	singular	completed	full-basis-match	groebner	58	66141cb10979e2f539d2e82b92ba16e337becd3faffa0818ef073e2a0c13e1cb
+1	BIOMD0000000123	msolve	completed	full-basis-match	groebner	58	66141cb10979e2f539d2e82b92ba16e337becd3faffa0818ef073e2a0c13e1cb
+1	BIOMD0000000123	polymojo	completed	full-basis-match	groebner	58	66141cb10979e2f539d2e82b92ba16e337becd3faffa0818ef073e2a0c13e1cb
+2	dummy	groebner	completed	full-basis-match	groebner	2	3a1ff095ada71f20d4c902a0d1b0a78a97cf4d15fa1e428e936e6d83c7223991
+2	dummy	singular	completed	full-basis-match	groebner	2	3a1ff095ada71f20d4c902a0d1b0a78a97cf4d15fa1e428e936e6d83c7223991
+2	dummy	msolve	completed	full-basis-match	groebner	2	3a1ff095ada71f20d4c902a0d1b0a78a97cf4d15fa1e428e936e6d83c7223991
+2	dummy	polymojo	completed	full-basis-match	groebner	2	3a1ff095ada71f20d4c902a0d1b0a78a97cf4d15fa1e428e936e6d83c7223991
+2	cyclic 7	groebner	completed	full-basis-match	groebner	209	a18692aad2f0c2aaa5352eb8c7d1e492fbe7d41339de1d41547c06a8c06ab73b
+2	cyclic 7	singular	completed	full-basis-match	groebner	209	a18692aad2f0c2aaa5352eb8c7d1e492fbe7d41339de1d41547c06a8c06ab73b
+2	cyclic 7	msolve	completed	full-basis-match	groebner	209	a18692aad2f0c2aaa5352eb8c7d1e492fbe7d41339de1d41547c06a8c06ab73b
+2	cyclic 7	polymojo	completed	full-basis-match	groebner	209	a18692aad2f0c2aaa5352eb8c7d1e492fbe7d41339de1d41547c06a8c06ab73b
+2	cyclic 8	groebner	completed	full-basis-match	groebner	372	5d59fb2ef2340d1e308a1305a56b8d61c49fef00463211c0722a0c4d3a6b234a
+2	cyclic 8	singular	timeout	not-completed	groebner		
+2	cyclic 8	msolve	completed	full-basis-match	groebner	372	5d59fb2ef2340d1e308a1305a56b8d61c49fef00463211c0722a0c4d3a6b234a
+2	cyclic 8	polymojo	completed	full-basis-match	groebner	372	5d59fb2ef2340d1e308a1305a56b8d61c49fef00463211c0722a0c4d3a6b234a
+2	cyclic 9	groebner	timeout	not-completed			
+2	cyclic 9	singular	timeout	not-completed			
+2	cyclic 9	msolve	timeout	not-completed			
+2	cyclic 9	polymojo	timeout	not-completed			
+2	katsura 10	groebner	completed	full-basis-match	groebner	537	b108d55d790a594c3245f060e9a0b8adecb4f3512aaf4fe23f98132125dc77d2
+2	katsura 10	singular	timeout	not-completed	groebner		
+2	katsura 10	msolve	completed	full-basis-match	groebner	537	b108d55d790a594c3245f060e9a0b8adecb4f3512aaf4fe23f98132125dc77d2
+2	katsura 10	polymojo	completed	full-basis-match	groebner	537	b108d55d790a594c3245f060e9a0b8adecb4f3512aaf4fe23f98132125dc77d2
+2	katsura 11	groebner	completed	full-basis-match	groebner	1050	02501d9b0baf57391f2c74cc8e595c1268d62d2fb28e40c756f58844a2d744a5
+2	katsura 11	singular	timeout	not-completed	groebner		
+2	katsura 11	msolve	completed	full-basis-match	groebner	1050	02501d9b0baf57391f2c74cc8e595c1268d62d2fb28e40c756f58844a2d744a5
+2	katsura 11	polymojo	completed	full-basis-match	groebner	1050	02501d9b0baf57391f2c74cc8e595c1268d62d2fb28e40c756f58844a2d744a5
+2	katsura 12	groebner	timeout	not-completed			
+2	katsura 12	singular	timeout	not-completed			
+2	katsura 12	msolve	timeout	not-completed			
+2	katsura 12	polymojo	timeout	not-completed			
+2	katsura 13	groebner	timeout	not-completed			
+2	katsura 13	singular	timeout	not-completed			
+2	katsura 13	msolve	timeout	not-completed			
+2	katsura 13	polymojo	timeout	not-completed			
+2	eco 11	groebner	completed	full-basis-match	groebner	389	92d19f57b80e788820249c13213823a7386f02d67483ccadc4213bb6afa6f8fe
+2	eco 11	singular	timeout	not-completed	groebner		
+2	eco 11	msolve	completed	full-basis-match	groebner	389	92d19f57b80e788820249c13213823a7386f02d67483ccadc4213bb6afa6f8fe
+2	eco 11	polymojo	completed	full-basis-match	groebner	389	92d19f57b80e788820249c13213823a7386f02d67483ccadc4213bb6afa6f8fe
+2	eco 12	groebner	completed	full-basis-match	groebner	743	55b073e824a626c4592e5649182c4103ab48635b57371fcc023c9a839b41edd8
+2	eco 12	singular	timeout	not-completed	groebner		
+2	eco 12	msolve	completed	full-basis-match	groebner	743	55b073e824a626c4592e5649182c4103ab48635b57371fcc023c9a839b41edd8
+2	eco 12	polymojo	completed	full-basis-match	groebner	743	55b073e824a626c4592e5649182c4103ab48635b57371fcc023c9a839b41edd8
+2	eco 13	groebner	completed	full-basis-match	groebner	1465	a9e96303abec5c08b5a9443856081811c7a21d9dae362ba2cb6aafd139b318fe
+2	eco 13	singular	timeout	not-completed	groebner		
+2	eco 13	msolve	completed	full-basis-match	groebner	1465	a9e96303abec5c08b5a9443856081811c7a21d9dae362ba2cb6aafd139b318fe
+2	eco 13	polymojo	completed	full-basis-match	groebner	1465	a9e96303abec5c08b5a9443856081811c7a21d9dae362ba2cb6aafd139b318fe
+2	eco 14	groebner	timeout	not-completed			
+2	eco 14	singular	timeout	not-completed			
+2	eco 14	msolve	timeout	not-completed			
+2	eco 14	polymojo	timeout	not-completed			
+2	noon 7	groebner	completed	full-basis-match	groebner	495	690f8e96ba605b3c3e658e327efc6d827b8ce061079865d4ff2ed392c038fa7f
+2	noon 7	singular	completed	full-basis-match	groebner	495	690f8e96ba605b3c3e658e327efc6d827b8ce061079865d4ff2ed392c038fa7f
+2	noon 7	msolve	completed	full-basis-match	groebner	495	690f8e96ba605b3c3e658e327efc6d827b8ce061079865d4ff2ed392c038fa7f
+2	noon 7	polymojo	completed	full-basis-match	groebner	495	690f8e96ba605b3c3e658e327efc6d827b8ce061079865d4ff2ed392c038fa7f
+2	noon 8	groebner	completed	full-basis-match	groebner	1338	e71930f212a8f9cf4e3f285bb3507c19794480d773a42f86513dc740e178fb10
+2	noon 8	singular	completed	full-basis-match	groebner	1338	e71930f212a8f9cf4e3f285bb3507c19794480d773a42f86513dc740e178fb10
+2	noon 8	msolve	completed	full-basis-match	groebner	1338	e71930f212a8f9cf4e3f285bb3507c19794480d773a42f86513dc740e178fb10
+2	noon 8	polymojo	completed	full-basis-match	groebner	1338	e71930f212a8f9cf4e3f285bb3507c19794480d773a42f86513dc740e178fb10
+2	noon 9	groebner	completed	full-basis-match	groebner	3682	44843eaae2247878512570442c66cf559d27184e219b47f7b52e532c67dd52bd
+2	noon 9	singular	timeout	not-completed	groebner		
+2	noon 9	msolve	completed	full-basis-match	groebner	3682	44843eaae2247878512570442c66cf559d27184e219b47f7b52e532c67dd52bd
+2	noon 9	polymojo	completed	full-basis-match	groebner	3682	44843eaae2247878512570442c66cf559d27184e219b47f7b52e532c67dd52bd
+2	noon 10	groebner	timeout	not-completed			
+2	noon 10	singular	timeout	not-completed			
+2	noon 10	msolve	timeout	not-completed			
+2	noon 10	polymojo	timeout	not-completed			
+2	henrion 5	groebner	completed	full-basis-match	groebner	33	d09034f1ca9be70fb2a56485e3320032739ce6b544500c7dcc2939cbd4d4f2a0
+2	henrion 5	singular	completed	full-basis-match	groebner	33	d09034f1ca9be70fb2a56485e3320032739ce6b544500c7dcc2939cbd4d4f2a0
+2	henrion 5	msolve	completed	full-basis-match	groebner	33	d09034f1ca9be70fb2a56485e3320032739ce6b544500c7dcc2939cbd4d4f2a0
+2	henrion 5	polymojo	completed	full-basis-match	groebner	33	d09034f1ca9be70fb2a56485e3320032739ce6b544500c7dcc2939cbd4d4f2a0
+2	henrion 6	groebner	completed	full-basis-match	groebner	90	ab4f9eff340ddba03f2a356b9d136f4cdd80cb5621ad13c6883ad2e9055fc355
+2	henrion 6	singular	completed	full-basis-match	groebner	90	ab4f9eff340ddba03f2a356b9d136f4cdd80cb5621ad13c6883ad2e9055fc355
+2	henrion 6	msolve	completed	full-basis-match	groebner	90	ab4f9eff340ddba03f2a356b9d136f4cdd80cb5621ad13c6883ad2e9055fc355
+2	henrion 6	polymojo	completed	full-basis-match	groebner	90	ab4f9eff340ddba03f2a356b9d136f4cdd80cb5621ad13c6883ad2e9055fc355
+2	henrion 7	groebner	completed	full-basis-match	groebner	415	b737a5012372f0357f6c1c6b25a7b05496ef381b4c761aacc9feb6fb59947f18
+2	henrion 7	singular	timeout	not-completed	groebner		
+2	henrion 7	msolve	completed	full-basis-match	groebner	415	b737a5012372f0357f6c1c6b25a7b05496ef381b4c761aacc9feb6fb59947f18
+2	henrion 7	polymojo	completed	full-basis-match	groebner	415	b737a5012372f0357f6c1c6b25a7b05496ef381b4c761aacc9feb6fb59947f18
+2	henrion 8	groebner	timeout	not-completed			
+2	henrion 8	singular	timeout	not-completed			
+2	henrion 8	msolve	timeout	not-completed			
+2	henrion 8	polymojo	timeout	not-completed			
+2	reimer 6	groebner	completed	full-basis-match	groebner	95	1eae0e20e4da76857cce6955202dbcfb96c7e903829fa70cde996b906367076a
+2	reimer 6	singular	completed	full-basis-match	groebner	95	1eae0e20e4da76857cce6955202dbcfb96c7e903829fa70cde996b906367076a
+2	reimer 6	msolve	completed	full-basis-match	groebner	95	1eae0e20e4da76857cce6955202dbcfb96c7e903829fa70cde996b906367076a
+2	reimer 6	polymojo	completed	full-basis-match	groebner	95	1eae0e20e4da76857cce6955202dbcfb96c7e903829fa70cde996b906367076a
+2	reimer 7	groebner	completed	full-basis-match	groebner	227	41c5dd1a0b30f092124e8a970ee79855f9dcc4e139c397664e1abb78d2e33062
+2	reimer 7	singular	timeout	not-completed	groebner		
+2	reimer 7	msolve	completed	full-basis-match	groebner	227	41c5dd1a0b30f092124e8a970ee79855f9dcc4e139c397664e1abb78d2e33062
+2	reimer 7	polymojo	completed	full-basis-match	groebner	227	41c5dd1a0b30f092124e8a970ee79855f9dcc4e139c397664e1abb78d2e33062
+2	reimer 8	groebner	completed	full-basis-match	groebner	612	d48c7a5a614ab3005aa94cdef66da183791102859986dca3ee82e35b9af6ec68
+2	reimer 8	singular	timeout	not-completed	groebner		
+2	reimer 8	msolve	completed	full-basis-match	groebner	612	d48c7a5a614ab3005aa94cdef66da183791102859986dca3ee82e35b9af6ec68
+2	reimer 8	polymojo	completed	full-basis-match	groebner	612	d48c7a5a614ab3005aa94cdef66da183791102859986dca3ee82e35b9af6ec68
+2	chandra 11	groebner	completed	full-basis-match	groebner	1024	d52c1c13dce0dfa67f9b95010a4e53f94092c322f83d779bee223f03067d864e
+2	chandra 11	singular	completed	full-basis-match	groebner	1024	d52c1c13dce0dfa67f9b95010a4e53f94092c322f83d779bee223f03067d864e
+2	chandra 11	msolve	completed	full-basis-match	groebner	1024	d52c1c13dce0dfa67f9b95010a4e53f94092c322f83d779bee223f03067d864e
+2	chandra 11	polymojo	completed	full-basis-match	groebner	1024	d52c1c13dce0dfa67f9b95010a4e53f94092c322f83d779bee223f03067d864e
+2	chandra 12	groebner	completed	full-basis-match	groebner	2048	a7ed8509d909c1e9260d2337db497b025221511aabddde81da7f506ff6d7606e
+2	chandra 12	singular	timeout	not-completed	groebner		
+2	chandra 12	msolve	completed	full-basis-match	groebner	2048	a7ed8509d909c1e9260d2337db497b025221511aabddde81da7f506ff6d7606e
+2	chandra 12	polymojo	completed	full-basis-match	groebner	2048	a7ed8509d909c1e9260d2337db497b025221511aabddde81da7f506ff6d7606e
+2	chandra 13	groebner	completed	full-basis-match	groebner	4096	416c567353d255bdbfacd89250bc2f50cc5641068fb4cf488bf7c1b331c759ea
+2	chandra 13	singular	timeout	not-completed	groebner		
+2	chandra 13	msolve	completed	full-basis-match	groebner	4096	416c567353d255bdbfacd89250bc2f50cc5641068fb4cf488bf7c1b331c759ea
+2	chandra 13	polymojo	completed	full-basis-match	groebner	4096	416c567353d255bdbfacd89250bc2f50cc5641068fb4cf488bf7c1b331c759ea
+2	chandra 14	groebner	timeout	not-completed			
+2	chandra 14	singular	timeout	not-completed			
+2	chandra 14	msolve	timeout	not-completed			
+2	chandra 14	polymojo	timeout	not-completed			
+3	dummy	groebner	completed	full-basis-match	groebner	2	a38e76bc4b7f7ef77ef6039d479936e56ec9106353c28f99b15b406a5ba507ac
+3	dummy	singular	completed	full-basis-match	groebner	2	a38e76bc4b7f7ef77ef6039d479936e56ec9106353c28f99b15b406a5ba507ac
+3	dummy	msolve	completed	full-basis-match	groebner	2	a38e76bc4b7f7ef77ef6039d479936e56ec9106353c28f99b15b406a5ba507ac
+3	dummy	polymojo	completed	full-basis-match	groebner	2	a38e76bc4b7f7ef77ef6039d479936e56ec9106353c28f99b15b406a5ba507ac
+3	cyclic 7	groebner	completed	full-basis-match	groebner	209	16a34dac2b9c1b8ed4d9702a2ca72dbbd6767594016d239be459e2f565b73ac6
+3	cyclic 7	singular	timeout	not-completed	groebner		
+3	cyclic 7	msolve	completed	full-basis-match	groebner	209	16a34dac2b9c1b8ed4d9702a2ca72dbbd6767594016d239be459e2f565b73ac6
+3	cyclic 7	polymojo	completed	full-basis-match	groebner	209	16a34dac2b9c1b8ed4d9702a2ca72dbbd6767594016d239be459e2f565b73ac6
+3	cyclic 8	groebner	completed	full-basis-match	groebner	372	b663f792e36ac6a5d4550e2c6848c0b404711ccafd4669d23a4bebc7a5d230fb
+3	cyclic 8	singular	timeout	not-completed	groebner		
+3	cyclic 8	msolve	completed	full-basis-match	groebner	372	b663f792e36ac6a5d4550e2c6848c0b404711ccafd4669d23a4bebc7a5d230fb
+3	cyclic 8	polymojo	completed	full-basis-match	groebner	372	b663f792e36ac6a5d4550e2c6848c0b404711ccafd4669d23a4bebc7a5d230fb
+3	katsura 9	groebner	completed	full-basis-match	groebner	272	0534ab1ecfb9337a3126aad6aae7c8aeb4386dafa721a5917e9a25f60eb41b57
+3	katsura 9	singular	timeout	not-completed	groebner		
+3	katsura 9	msolve	completed	full-basis-match	groebner	272	0534ab1ecfb9337a3126aad6aae7c8aeb4386dafa721a5917e9a25f60eb41b57
+3	katsura 9	polymojo	completed	full-basis-match	groebner	272	0534ab1ecfb9337a3126aad6aae7c8aeb4386dafa721a5917e9a25f60eb41b57
+3	katsura 10	groebner	completed	full-basis-match	groebner	537	7bb1b7a64187450cb7d0395732daec43d4a5dfa6c0de7b5b77828954409a6550
+3	katsura 10	singular	timeout	not-completed	groebner		
+3	katsura 10	msolve	completed	full-basis-match	groebner	537	7bb1b7a64187450cb7d0395732daec43d4a5dfa6c0de7b5b77828954409a6550
+3	katsura 10	polymojo	completed	full-basis-match	groebner	537	7bb1b7a64187450cb7d0395732daec43d4a5dfa6c0de7b5b77828954409a6550
+3	katsura 11	groebner	timeout	not-completed			
+3	katsura 11	singular	timeout	not-completed			
+3	katsura 11	msolve	timeout	not-completed			
+3	katsura 11	polymojo	timeout	not-completed			
+3	eco 10	groebner	completed	full-basis-match	groebner	203	3754d2067f53bd5a1e5f3deb72a62144d8ebd2fecad846a37506f1222f48bd21
+3	eco 10	singular	timeout	not-completed	groebner		
+3	eco 10	msolve	completed	full-basis-match	groebner	203	3754d2067f53bd5a1e5f3deb72a62144d8ebd2fecad846a37506f1222f48bd21
+3	eco 10	polymojo	completed	full-basis-match	groebner	203	3754d2067f53bd5a1e5f3deb72a62144d8ebd2fecad846a37506f1222f48bd21
+3	eco 11	groebner	completed	full-basis-match	groebner	389	39dbf47e63685d5c45eaa0c12160c6e024d3482e744157d2ece7e896edc3a2d2
+3	eco 11	singular	timeout	not-completed	groebner		
+3	eco 11	msolve	completed	full-basis-match	groebner	389	39dbf47e63685d5c45eaa0c12160c6e024d3482e744157d2ece7e896edc3a2d2
+3	eco 11	polymojo	completed	full-basis-match	groebner	389	39dbf47e63685d5c45eaa0c12160c6e024d3482e744157d2ece7e896edc3a2d2
+3	eco 12	groebner	completed	full-basis-match	groebner	743	c05668f48dced86005417f4f10233b6e6ef47d0ca31855c21666d6fefae0b45d
+3	eco 12	singular	timeout	not-completed	groebner		
+3	eco 12	msolve	completed	full-basis-match	groebner	743	c05668f48dced86005417f4f10233b6e6ef47d0ca31855c21666d6fefae0b45d
+3	eco 12	polymojo	completed	full-basis-match	groebner	743	c05668f48dced86005417f4f10233b6e6ef47d0ca31855c21666d6fefae0b45d
+3	eco 13	groebner	timeout	not-completed			
+3	eco 13	singular	timeout	not-completed			
+3	eco 13	msolve	timeout	not-completed			
+3	eco 13	polymojo	completed	no-external-reference		1465	6d04f24bdad933c05d34fec366957281bce3c8810daadd7d9018e41d552bce58
+3	noon 7	groebner	completed	full-basis-match	groebner	495	a5846c0b4e98574fd4bd38e5e817ba1510f3cb81e2ede335ab8c8db63b99b513
+3	noon 7	singular	completed	full-basis-match	groebner	495	a5846c0b4e98574fd4bd38e5e817ba1510f3cb81e2ede335ab8c8db63b99b513
+3	noon 7	msolve	completed	full-basis-match	groebner	495	a5846c0b4e98574fd4bd38e5e817ba1510f3cb81e2ede335ab8c8db63b99b513
+3	noon 7	polymojo	completed	full-basis-match	groebner	495	a5846c0b4e98574fd4bd38e5e817ba1510f3cb81e2ede335ab8c8db63b99b513
+3	noon 8	groebner	completed	full-basis-match	groebner	1338	3550c7704ac06cffc9a905d0ad9e49ecb39c4be45a9d5037542d3aa2f08d3950
+3	noon 8	singular	completed	full-basis-match	groebner	1338	3550c7704ac06cffc9a905d0ad9e49ecb39c4be45a9d5037542d3aa2f08d3950
+3	noon 8	msolve	completed	full-basis-match	groebner	1338	3550c7704ac06cffc9a905d0ad9e49ecb39c4be45a9d5037542d3aa2f08d3950
+3	noon 8	polymojo	completed	full-basis-match	groebner	1338	3550c7704ac06cffc9a905d0ad9e49ecb39c4be45a9d5037542d3aa2f08d3950
+3	noon 9	groebner	timeout	not-completed	msolve		
+3	noon 9	singular	timeout	not-completed	msolve		
+3	noon 9	msolve	completed	full-basis-match	msolve	3682	e8bc6e9769a63085321868f28c7973fa71da7818e92aeae58a0ea964f3216487
+3	noon 9	polymojo	completed	full-basis-match	msolve	3682	e8bc6e9769a63085321868f28c7973fa71da7818e92aeae58a0ea964f3216487
+3	henrion 6	groebner	completed	full-basis-match	groebner	90	b451da37dcca784073aa01ae57f06f4dfdb4fdc4817b8d9de4c08528845f8e73
+3	henrion 6	singular	completed	full-basis-match	groebner	90	b451da37dcca784073aa01ae57f06f4dfdb4fdc4817b8d9de4c08528845f8e73
+3	henrion 6	msolve	completed	full-basis-match	groebner	90	b451da37dcca784073aa01ae57f06f4dfdb4fdc4817b8d9de4c08528845f8e73
+3	henrion 6	polymojo	completed	full-basis-match	groebner	90	b451da37dcca784073aa01ae57f06f4dfdb4fdc4817b8d9de4c08528845f8e73
+3	henrion 7	groebner	timeout	not-completed			
+3	henrion 7	singular	timeout	not-completed			
+3	henrion 7	msolve	timeout	not-completed			
+3	henrion 7	polymojo	timeout	not-completed			
+3	reimer 6	groebner	completed	full-basis-match	groebner	95	188ff39c4344b93f71e31d66feaa1e5f171b82080605966375a5feb9e84c0bb0
+3	reimer 6	singular	timeout	not-completed	groebner		
+3	reimer 6	msolve	completed	full-basis-match	groebner	95	188ff39c4344b93f71e31d66feaa1e5f171b82080605966375a5feb9e84c0bb0
+3	reimer 6	polymojo	completed	full-basis-match	groebner	95	188ff39c4344b93f71e31d66feaa1e5f171b82080605966375a5feb9e84c0bb0
+3	reimer 7	groebner	completed	full-basis-match	groebner	227	aa74b0aed634d30d208903e8a941f70666b519838c0e97642c2b609cf5674ac0
+3	reimer 7	singular	timeout	not-completed	groebner		
+3	reimer 7	msolve	completed	full-basis-match	groebner	227	aa74b0aed634d30d208903e8a941f70666b519838c0e97642c2b609cf5674ac0
+3	reimer 7	polymojo	completed	full-basis-match	groebner	227	aa74b0aed634d30d208903e8a941f70666b519838c0e97642c2b609cf5674ac0
+3	reimer 8	groebner	timeout	not-completed			
+3	reimer 8	singular	timeout	not-completed			
+3	reimer 8	msolve	timeout	not-completed			
+3	reimer 8	polymojo	timeout	not-completed			
+3	chandra 9	groebner	completed	full-basis-match	groebner	256	47a9c27b9070d0fc5dda90383c8981b5711cf4ead20f345d6a8f333fd8158938
+3	chandra 9	singular	completed	full-basis-match	groebner	256	47a9c27b9070d0fc5dda90383c8981b5711cf4ead20f345d6a8f333fd8158938
+3	chandra 9	msolve	completed	full-basis-match	groebner	256	47a9c27b9070d0fc5dda90383c8981b5711cf4ead20f345d6a8f333fd8158938
+3	chandra 9	polymojo	completed	full-basis-match	groebner	256	47a9c27b9070d0fc5dda90383c8981b5711cf4ead20f345d6a8f333fd8158938
+3	chandra 10	groebner	completed	full-basis-match	groebner	512	4e08acb460c62642886db856ca714492f5a48b0a7e33da7821ebe9ed4778dd1e
+3	chandra 10	singular	completed	full-basis-match	groebner	512	4e08acb460c62642886db856ca714492f5a48b0a7e33da7821ebe9ed4778dd1e
+3	chandra 10	msolve	completed	full-basis-match	groebner	512	4e08acb460c62642886db856ca714492f5a48b0a7e33da7821ebe9ed4778dd1e
+3	chandra 10	polymojo	completed	full-basis-match	groebner	512	4e08acb460c62642886db856ca714492f5a48b0a7e33da7821ebe9ed4778dd1e
+3	chandra 11	groebner	completed	full-basis-match	groebner	1024	0d5280e770665e3d17cfd079ba7a9ee2935aa75252115fc4d98b0027f1734aa0
+3	chandra 11	singular	timeout	not-completed	groebner		
+3	chandra 11	msolve	completed	full-basis-match	groebner	1024	0d5280e770665e3d17cfd079ba7a9ee2935aa75252115fc4d98b0027f1734aa0
+3	chandra 11	polymojo	completed	full-basis-match	groebner	1024	0d5280e770665e3d17cfd079ba7a9ee2935aa75252115fc4d98b0027f1734aa0
+3	chandra 12	groebner	timeout	not-completed			
+3	chandra 12	singular	timeout	not-completed			
+3	chandra 12	msolve	timeout	not-completed			
+3	chandra 12	polymojo	completed	no-external-reference		2048	c0c0a2889ae6c07a251a11d294566ed9c71bb5e59663d4c89d1abae0c8f47e10
+3	chandra 13	groebner	timeout	not-completed			
+3	chandra 13	singular	timeout	not-completed			
+3	chandra 13	msolve	timeout	not-completed			
+3	chandra 13	polymojo	timeout	not-completed			
+3	ipp	groebner	completed	full-basis-match	groebner	74	d3315b14cdf01025815fe773999235de602b711b19183764d952387060e69682
+3	ipp	singular	timeout	not-completed	groebner		
+3	ipp	msolve	completed	full-basis-match	groebner	74	d3315b14cdf01025815fe773999235de602b711b19183764d952387060e69682
+3	ipp	polymojo	completed	full-basis-match	groebner	74	d3315b14cdf01025815fe773999235de602b711b19183764d952387060e69682

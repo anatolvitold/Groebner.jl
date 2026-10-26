@@ -1,0 +1,1057 @@
+diff --git a/scripts/benchmark_different_software/README.md b/scripts/benchmark_different_software/README.md
+index 34cd9ac..97afcf9 100644
+--- a/scripts/benchmark_different_software/README.md
++++ b/scripts/benchmark_different_software/README.md
+@@ -2,6 +2,9 @@
+ 
+ Benchmarks for `Groebner.jl`, `Maple`, `msolve`, `OpenF4`, `Singular`.
+ 
++Optional `polymojo` and `polymojocertified` backends are also available. See
++[Poly Mojo setup, timing modes, and validation](generate/polymojo/README.md).
++
+ The definitions of benchmark systems can be found in `benchmark_systems.jl`.
+ 
+ Computed bases will be verified against short SHA certificate, which are assumed to
+diff --git a/scripts/benchmark_different_software/benchmark_systems.jl b/scripts/benchmark_different_software/benchmark_systems.jl
+index 70971fc..a3543f8 100644
+--- a/scripts/benchmark_different_software/benchmark_systems.jl
++++ b/scripts/benchmark_different_software/benchmark_systems.jl
+@@ -110,10 +110,10 @@ function benchmark_set_2()
+         ("reimer 7", Groebner.Examples.reimern(7, k=ground_field)),
+         ("reimer 8", Groebner.Examples.reimern(8, k=ground_field)),
+         # ("reimer 9", Groebner.Examples.reimern(9, k=ground_field)),
+-        ("chandra 11", Groebner.chandran(11, k=ground_field)),
+-        ("chandra 12", Groebner.chandran(12, k=ground_field)),
+-        ("chandra 13", Groebner.chandran(13, k=ground_field)),
+-        ("chandra 14", Groebner.chandran(14, k=ground_field))
++        ("chandra 11", Groebner.Examples.chandran(11, k=ground_field)),
++        ("chandra 12", Groebner.Examples.chandran(12, k=ground_field)),
++        ("chandra 13", Groebner.Examples.chandran(13, k=ground_field)),
++        ("chandra 14", Groebner.Examples.chandran(14, k=ground_field))
+     ]
+ 
+     (name="Integers modulo 1031", field=ground_field, systems=systems)
+diff --git a/scripts/benchmark_different_software/generate/groebner/run_in_groebner.jl b/scripts/benchmark_different_software/generate/groebner/run_in_groebner.jl
+index 973ee7a..9b15869 100644
+--- a/scripts/benchmark_different_software/generate/groebner/run_in_groebner.jl
++++ b/scripts/benchmark_different_software/generate/groebner/run_in_groebner.jl
+@@ -8,7 +8,9 @@ using Statistics
+ 
+ using Groebner
+ 
+-Groebner.logging_enabled() = false
++if isdefined(Groebner, :logging_enabled)
++    @eval Groebner.logging_enabled() = false
++end
+ Groebner.invariants_enabled() = false
+ 
+ logger = Logging.ConsoleLogger(stdout, Logging.Info)
+@@ -37,7 +39,8 @@ path = (@__DIR__) * "/$BENCHMARK_DIR/$PROBLEM_NAME/$PROBLEM_NAME.jl"
+ include(path)
+ 
+ # Compile
+-groebner(system, threaded=:no)
++const single_thread_options = isdefined(Base, :pkgversion) && Base.pkgversion(Groebner) >= v"0.10" ? (; tasks=1) : (; threaded=:no)
++groebner(system; single_thread_options...)
+ 
+ function process_system()
+     @info "Processing $PROBLEM_NAME"
+@@ -50,7 +53,7 @@ function process_system()
+     end
+     for iter in 1:NUM_RUNS
+         @info "Computing GB.." iter
+-        timing = @timed result = groebner(system, threaded=:no)
++        timing = @timed result = groebner(system; single_thread_options...)
+         @debug "Result is" result
+         if VALIDATE
+             output_fn = (@__DIR__) * "/$BENCHMARK_DIR/$PROBLEM_NAME/$(output_filename())"
+diff --git a/scripts/benchmark_different_software/generate/polymojo/README.md b/scripts/benchmark_different_software/generate/polymojo/README.md
+new file mode 100644
+index 0000000..e3f8703
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/README.md
+@@ -0,0 +1,119 @@
++# Poly Mojo
++
++Optional comparison backends for the [Poly Mojo](https://github.com/Spellbound-Mojo/poly_mojo)
++polynomial library. They compute reduced monic Gröbner bases over QQ and native
++prime fields, using degree reverse lexicographic order and the input variable order.
++The bridge calls the public `polynomials.groebner` API directly.
++
++## Prepare the environment
++
++Use an activated environment containing **Mojo 1.2.0**, Python 3.11+, and the
++precompiled `poly_mojo` package with its matching `apn_mojo` dependency. Pin the
++exact package release in that environment. These dependencies are only needed
++when selecting a Poly Mojo backend.
++
++During development, a source build can be supplied with `POLY_MOJO_PATH` pointing
++to its precompiled package directory. The bridge never builds the library itself.
++For an installed package, it finds the modules in the activated prefix's
++`lib/mojo` directory automatically. `MOJO_COMMAND` can override the compiler on PATH;
++retain the `MODULAR_HOME` supplied by environment activation.
++
++From the repository root, build the bridge once:
++
++```sh
++export POLY_MOJO_DRIVER="$(python scripts/benchmark_different_software/generate/polymojo/build.py)"
++```
++
++The returned executable supports all variable counts, both coefficient fields,
++and both certificate modes. The cache includes compiler, runtime, platform,
++bridge source, and package hashes. No compilation occurs inside case timeouts.
++Prime moduli and their nonnegative representatives must fit a signed 64-bit
++integer; rational numerators and denominators have arbitrary precision.
++
++The comparison runner's bundled Julia environments can be used as usual. To run
++against the current Groebner.jl checkout instead, prepare a shared environment once:
++
++```sh
++JULIA_NUM_PRECOMPILE_TASKS=1 julia scripts/benchmark_different_software/generate/polymojo/setup.jl
++export BENCHMARK_JULIA_ENV="$PWD/.local/environment"
++export JULIA_NUM_THREADS=1
++export OPENBLAS_NUM_THREADS=1
++```
++
++This optional setup keeps package installation outside individual workers and
++selects PrettyTables 2 for the runner's reporting API. Preserve the generated
++Manifest with results. When `BENCHMARK_JULIA_ENV` is unset, existing environment
++selection is unchanged.
++
++## Run the upstream suites
++
++```sh
++julia scripts/benchmark_different_software/one_script_to_run_them_all.jl polymojo --suite=1 --nworkers=1 --nruns=3 --validate=yes
++julia scripts/benchmark_different_software/one_script_to_run_them_all.jl polymojocertified --suite=1 --nworkers=1 --nruns=3 --validate=yes
++```
++
++Alternatively, pass `--bpolymojo=/absolute/path/to/driver` instead of setting
++`POLY_MOJO_DRIVER`. Suite 1 uses GF(1073741827), suite 2 uses GF(1031), and suite 3
++uses QQ. Suite 0 contains two small smoke cases. `ALL` attempts both optional
++backends, skipping them through the existing setup-error handling when the
++executable is unavailable.
++
++## Timing and guarantees
++
++| Backend | Timed computation | Separate verification |
++|---|---|---|
++| `polymojo` | `certify=False, trace=False` | None |
++| `polymojocertified` | `certify=True, trace=True`, including retained proof evidence | Trace replay plus generator reduction and Buchberger's criterion |
++
++Ordinary QQ reconstruction is probabilistic, like Groebner.jl's default
++`certify=false`. Certified verification establishes ideal equality and the
++Gröbner property. Full comparison with a reference reduced basis also checks
++reducedness. The two production modes may choose different algorithms.
++
++Each case performs one untimed warm-up and `--nruns` measured executions, reporting
++the minimum computation time, as the Groebner.jl backend does. The certified
++backend's standard report adds **Verify certificate, s**; the combined report adds
++**polymojocertified (verify)**. Verification is excluded from computation time and
++from fastest-computation highlighting. These are independent minima and should
++not be added to claim a measured minimum total.
++
++`samples.csv` retains each measured compute/verify pair, including full precision.
++Input decoding and output serialization are untimed. The runner's process timeout
++includes warm-up, every repetition, verification, and output. A result is reported
++only after all requested repetitions and certificate checks succeed.
++
++## Validate and test
++
++Use the existing fingerprint checks for compatibility. For stronger validation,
++compare complete outputs after running a reference backend with `--validate=yes`:
++
++```sh
++julia --project="$BENCHMARK_JULIA_ENV" scripts/benchmark_different_software/generate/polymojo/validate.jl REFERENCE_OUTPUT POLYMOJO_OUTPUT CERTIFIED_OUTPUT
++```
++
++This checks the coefficient field, ordered variable names, basis size, and every
++coefficient and monomial, allowing only permutation of basis elements. It does
++not rely on the runner's stored fingerprints. No fingerprint files are changed
++by this comparison tool.
++
++Some reference backends, including msolve over QQ, emit primitive integer
++polynomials instead of monic polynomials. Use `validate.jl --normalize-monic
++REFERENCE_OUTPUT POLYMOJO_OUTPUT` to allow nonzero scalar multiples of each basis
++element. Field, variable order, basis size, and every normalized coefficient and
++monomial must still agree. This option compares bases up to scalar normalization;
++the default strict mode also checks that the output coefficients agree directly.
++
++Tests against an activated Julia benchmark environment:
++
++```sh
++python -m unittest discover -s scripts/benchmark_different_software/generate/polymojo -p 'test_build.py'
++julia --project="$BENCHMARK_JULIA_ENV" scripts/benchmark_different_software/generate/polymojo/test_validation.jl
++julia --project="$BENCHMARK_JULIA_ENV" scripts/benchmark_different_software/generate/polymojo/test_adapter.jl
++julia scripts/benchmark_different_software/one_script_to_run_them_all.jl polymojo --suite=0 --nworkers=1 --nruns=2 --validate=no
++julia scripts/benchmark_different_software/one_script_to_run_them_all.jl polymojocertified --suite=0 --nworkers=1 --nruns=2 --validate=no
++julia --project="$BENCHMARK_JULIA_ENV" scripts/benchmark_different_software/generate/polymojo/test_runner.jl
++```
++
++The setup tests use a fake compiler and need no Mojo installation. The remaining
++tests exercise the real bridge, exact coefficients, different variable counts,
++malformed input, optional-backend setup, and the standard reports.
+diff --git a/scripts/benchmark_different_software/generate/polymojo/build.py b/scripts/benchmark_different_software/generate/polymojo/build.py
+new file mode 100644
+index 0000000..fb02435
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/build.py
+@@ -0,0 +1,106 @@
++"""Compile the benchmark bridge once against already installed Mojo packages."""
++
++import fcntl
++import hashlib
++import json
++import os
++from pathlib import Path
++import platform
++import re
++import shutil
++import subprocess
++import sys
++import tempfile
++
++SOURCE = Path(__file__).with_name("driver.mojo")
++PACKAGES = ("apn_mojo.mojoc", "polynomials.mojoc")
++
++
++class SetupError(RuntimeError):
++    """An actionable error in the optional benchmark environment."""
++
++
++def package_directory(compiler, environ):
++    explicit = environ.get("POLY_MOJO_PATH")
++    if explicit:
++        candidates = [Path(explicit).expanduser().resolve()]
++    else:
++        candidates = []
++        if environ.get("CONDA_PREFIX"):
++            candidates.append(Path(environ["CONDA_PREFIX"]) / "lib" / "mojo")
++        candidates.append(compiler.parent.parent / "lib" / "mojo")
++    for folder in candidates:
++        if all((folder / name).is_file() for name in PACKAGES):
++            return folder.resolve()
++    locations = ", ".join(map(str, candidates))
++    raise SetupError(
++        "Precompiled Poly Mojo packages not found in " + locations
++        + "; activate the package environment or set POLY_MOJO_PATH."
++    )
++
++
++def build_driver(*, source=SOURCE, cache_dir=None, environ=None):
++    environ = dict(os.environ if environ is None else environ)
++    command = environ.get("MOJO_COMMAND", "mojo")
++    executable = shutil.which(command, path=environ.get("PATH", os.defpath))
++    if executable is None:
++        raise SetupError("Mojo not found; activate its environment or set MOJO_COMMAND.")
++    compiler = Path(executable).resolve()
++    version = subprocess.check_output([str(compiler), "--version"], env=environ, text=True).strip()
++    if not re.search(r"\bMojo 1\.2\.0(?:\s|$)", version):
++        raise SetupError(f"This bridge requires Mojo 1.2.0; found {version}.")
++    packages = package_directory(compiler, environ)
++    source = Path(source).resolve()
++    identity = {
++        "compiler": str(compiler),
++        "version": version,
++        "modular_home": environ.get("MODULAR_HOME", ""),
++        "platform": platform.system(),
++        "machine": platform.machine(),
++        "source": hashlib.sha256(source.read_bytes()).hexdigest(),
++        "packages": {
++            name: hashlib.sha256((packages / name).read_bytes()).hexdigest()
++            for name in PACKAGES
++        },
++    }
++    key = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()[:24]
++    if cache_dir is None:
++        cache_dir = SOURCE.parents[2] / "results" / "polymojo-build"
++    folder = Path(cache_dir).resolve() / key
++    folder.mkdir(parents=True, exist_ok=True)
++    binary = folder / "driver"
++    metadata = folder / "build.json"
++    # Separate setup invocations may race; only one compiles each cache entry.
++    with (folder / "build.lock").open("a+") as lock:
++        fcntl.flock(lock, fcntl.LOCK_EX)
++        if binary.is_file() and os.access(binary, os.X_OK) and metadata.is_file():
++            if json.loads(metadata.read_text()) == identity:
++                return binary
++        with tempfile.TemporaryDirectory(dir=folder) as temporary:
++            output = Path(temporary) / "driver"
++            subprocess.run(
++                [str(compiler), "build", "-I", str(packages), str(source), "-o", str(output)],
++                env=environ,
++                stdout=sys.stderr,
++                check=True,
++            )
++            if not output.is_file() or not os.access(output, os.X_OK):
++                raise SetupError("Mojo did not produce an executable benchmark bridge.")
++            record = Path(temporary) / "build.json"
++            record.write_text(json.dumps(identity, indent=2) + "\n")
++            output.replace(binary)
++            record.replace(metadata)
++    return binary
++
++
++def main():
++    try:
++        print(build_driver())
++    except (SetupError, OSError, subprocess.CalledProcessError) as error:
++        print(f"Poly Mojo setup: {error}", file=sys.stderr)
++        return 1
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/scripts/benchmark_different_software/generate/polymojo/driver.mojo b/scripts/benchmark_different_software/generate/polymojo/driver.mojo
+new file mode 100644
+index 0000000..98f47ba
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/driver.mojo
+@@ -0,0 +1,138 @@
++"""Runtime-sized bridge to Poly Mojo's public polynomial API."""
++from apn_mojo import Rational
++from polynomials import Budget, QQ, ModInt, Modulus, NoContext, CoefficientField, SparsePoly, Term, Monomial, MonomialOrder, groebner, check_groebner_basis
++from std.sys import argv
++from std.time import perf_counter_ns
++
++
++struct Reader(Movable):
++    var text: String
++    var position: Int
++
++    def __init__(out self, var text: String):
++        self.text = text^
++        self.position = 0
++
++    def line(mut self) raises -> String:
++        var end = self.text.find("\n", self.position)
++        if end < 0:
++            raise Error("truncated benchmark input")
++        var value = String(self.text[byte=self.position:end])
++        self.position = end + 1
++        return value^
++
++    def count(mut self) raises -> Int:
++        var value = Int(self.line())
++        if value < 0:
++            raise Error("negative benchmark count")
++        return value
++
++
++def run_case[C: CoefficientField](mut reader: Reader, ctx: C.Context, characteristic: String, directory: String, name: String, nruns: Int, certified: Bool, validate: Bool) raises:
++    var work = Budget()
++    var names = List[String]()
++    var axes = List[Int64]()
++    var nvars = reader.count()
++    for i in range(nvars):
++        names.append(reader.line())
++        axes.append(Int64(i))
++    var order = MonomialOrder(MonomialOrder.GREVLEX, axes^, work)
++    var generators = List[SparsePoly[C]]()
++    for _ in range(reader.count()):
++        var terms = List[Term[C]]()
++        for _ in range(reader.count()):
++            var coefficient = C.zero(ctx)
++            comptime if C == QQ:
++                coefficient = rebind_var[C](QQ(Rational(reader.line())))
++            else:
++                coefficient = rebind_var[C](ModInt(UInt64(reader.count()), rebind[Modulus](ctx)))
++            var pairs = List[Tuple[Int64, UInt32]]()
++            for axis in range(nvars):
++                var exponent = reader.count()
++                if exponent > Int(UInt32.MAX):
++                    raise Error("exponent exceeds UInt32")
++                if exponent:
++                    pairs.append((Int64(axis), UInt32(exponent)))
++            terms.append(Term[C](Monomial(pairs^, work), coefficient^))
++        generators.append(SparsePoly[C].from_terms(terms^, order, ctx, work))
++    if reader.position != reader.text.byte_length():
++        raise Error("trailing benchmark input")
++    var best = Float64.MAX
++    var best_check = Float64.MAX
++    # One untimed warm-up, matching the upstream Groebner.jl backend.
++    var samples = open(directory + "/samples.csv", "w")
++    samples.write("run,compute_seconds,verify_seconds\n")
++    for iteration in range(nruns + 1):
++        var budget = Budget()
++        var start = perf_counter_ns()
++        var result = groebner(generators, order, budget, certify=certified, trace=certified)
++        var elapsed = Float64(perf_counter_ns() - start) / 1e9
++        var check_time = 0.0
++        if certified:
++            var checking = Budget()
++            start = perf_counter_ns()
++            if not result.trace:
++                raise Error("certified basis did not retain a trace")
++            if not result.trace.value().replay(generators, result.basis, checking):
++                raise Error("basis trace verification failed")
++            if not check_groebner_basis(generators, result, checking):
++                raise Error("Groebner criterion verification failed")
++            check_time = Float64(perf_counter_ns() - start) / 1e9
++        if iteration:
++            best = min(best, elapsed)
++            best_check = min(best_check, check_time)
++            samples.write(String(iteration, ",", elapsed, ",", check_time, "\n"))
++        if iteration == nruns and validate:
++            with open(directory + "/output", "w") as output:
++                for i in range(len(names)):
++                    if i:
++                        output.write(", ")
++                    output.write(names[i])
++                output.write(String("\n", characteristic, "\n"))
++                for i in range(len(result.basis)):
++                    ref p = result.basis[i]
++                    if i:
++                        output.write(",\n")
++                    if not len(p.terms):
++                        output.write("0")
++                    for j in range(len(p.terms)):
++                        if j:
++                            output.write(" + ")
++                        ref term = p.terms[j]
++                        comptime if C == QQ:
++                            output.write(String(rebind[QQ](term.coefficient).value))
++                        else:
++                            output.write(String(rebind[ModInt](term.coefficient).value))
++                        for pair in term.monomial.pairs:
++                            output.write(String("*", names[Int(pair[0])], "^", pair[1]))
++                output.write("\n")
++    samples.close()
++    with open(directory + "/timings", "w") as output:
++        output.write(String(name, "\ntotal_time, ", best, "\n"))
++        if certified:
++            output.write(String("verification_time, ", best_check, "\n"))
++
++
++def main() raises:
++    var args = List[String]()
++    for arg in argv():
++        args.append(String(arg))
++    if len(args) != 7:
++        raise Error("usage: driver INPUT DIRECTORY NAME NRUNS plain|certified true|false")
++    if args[5] != "plain" and args[5] != "certified":
++        raise Error("invalid certificate mode")
++    if args[6] != "true" and args[6] != "false":
++        raise Error("invalid validation flag")
++    var nruns = Int(args[4])
++    if nruns < 1:
++        raise Error("nruns must be positive")
++    var reader = Reader(open(args[1], "r").read())
++    if reader.line() != "POLYMOJO GROEBNER 1":
++        raise Error("invalid interchange version")
++    var characteristic = reader.line()
++    var prime = UInt64(Int(characteristic))
++    if prime == 0:
++        run_case[QQ](reader, NoContext(), characteristic, args[2], args[3], nruns, args[5] == "certified", args[6] == "true")
++    else:
++        var work = Budget()
++        run_case[ModInt](reader, Modulus(prime, work), characteristic, args[2], args[3], nruns, args[5] == "certified", args[6] == "true")
+diff --git a/scripts/benchmark_different_software/generate/polymojo/generate.jl b/scripts/benchmark_different_software/generate/polymojo/generate.jl
+new file mode 100644
+index 0000000..843449a
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/generate.jl
+@@ -0,0 +1,19 @@
++function generate_benchmark_file_for_polymojo(system, dir)
++    ring = parent(first(system))
++    field = AbstractAlgebra.base_ring(ring)
++    characteristic = AbstractAlgebra.characteristic(field)
++    open(joinpath(dir, "input"), "w") do io
++        println(io, "POLYMOJO GROEBNER 1")
++        println(io, characteristic)
++        println(io, AbstractAlgebra.nvars(ring))
++        foreach(v -> println(io, v), AbstractAlgebra.gens(ring))
++        println(io, length(system))
++        for polynomial in system
++            println(io, length(polynomial))
++            for (coefficient, exponents) in zip(AbstractAlgebra.coefficients(polynomial), AbstractAlgebra.exponent_vectors(polynomial))
++                println(io, replace(string(coefficient), "//" => "/"))
++                foreach(e -> println(io, e), exponents)
++            end
++        end
++    end
++end
+diff --git a/scripts/benchmark_different_software/generate/polymojo/setup.jl b/scripts/benchmark_different_software/generate/polymojo/setup.jl
+new file mode 100644
+index 0000000..baa3f54
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/setup.jl
+@@ -0,0 +1,18 @@
++# Prepare once; benchmark workers only activate this resolved environment.
++using Pkg
++root = normpath(joinpath(@__DIR__, "../../../.."))
++environment = joinpath(root, ".local", "environment")
++mkpath(environment)
++project = joinpath(environment, "Project.toml")
++if !isfile(project)
++    cp(joinpath(@__DIR__, "../../Project.toml"), project)
++    open(project, "a") do io
++        println(io, "\n[compat]\nPrettyTables = \"2\"")
++    end
++end
++Pkg.activate(environment)
++Pkg.develop(path=root)
++Pkg.add(PackageSpec(name="PrettyTables", version="2"))
++Pkg.instantiate()
++Pkg.precompile()
++println("BENCHMARK_JULIA_ENV=$environment")
+diff --git a/scripts/benchmark_different_software/generate/polymojo/test_adapter.jl b/scripts/benchmark_different_software/generate/polymojo/test_adapter.jl
+new file mode 100644
+index 0000000..4d260d2
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/test_adapter.jl
+@@ -0,0 +1,60 @@
++using Test
++import AbstractAlgebra, Groebner
++include("generate.jl")
++include("validate.jl")
++
++function reference_output(system)
++    ring = parent(first(system))
++    options = isdefined(Base, :pkgversion) && Base.pkgversion(Groebner) >= v"0.10" ? (; tasks=1) : (; threaded=:no)
++    result = Groebner.groebner(system; options...)
++    join(string.(AbstractAlgebra.gens(ring)), ", ") * "\n" *
++        string(AbstractAlgebra.characteristic(AbstractAlgebra.base_ring(ring))) * "\n" *
++        join(string.(result), ",\n") * "\n"
++end
++
++@testset "Poly Mojo interchange and certificate modes" begin
++    for field in (AbstractAlgebra.QQ, AbstractAlgebra.GF(7), AbstractAlgebra.GF(1031), AbstractAlgebra.GF(1073741827))
++        _, (x, y) = AbstractAlgebra.polynomial_ring(field, ["x", "y"], internal_ordering=:degrevlex)
++        system = [x^2 + y^2 - 1, x + y]
++        for mode in ("plain", "certified")
++            mktempdir() do dir
++                generate_benchmark_file_for_polymojo(system, dir)
++                run(Cmd([ENV["POLY_MOJO_DRIVER"], joinpath(dir, "input"), dir,
++                         "dummy", "2", mode, "true"]))
++                @test compare_full_bases(reference_output(system), read(joinpath(dir, "output"), String))
++                @test length(readlines(joinpath(dir, "samples.csv"))) == 3
++                @test occursin("verification_time", read(joinpath(dir, "timings"), String)) == (mode == "certified")
++            end
++        end
++    end
++    _, (a, b, c) = AbstractAlgebra.polynomial_ring(AbstractAlgebra.QQ, ["a", "b", "c"], internal_ordering=:degrevlex)
++    system = [a + AbstractAlgebra.QQ(big(2)^100 + 17, 37)*b, b - c, c - 1]
++    for mode in ("plain", "certified")
++        mktempdir() do dir
++            generate_benchmark_file_for_polymojo(system, dir)
++            run(Cmd([ENV["POLY_MOJO_DRIVER"], joinpath(dir, "input"), dir,
++                     "large rational", "2", mode, "true"]))
++            @test compare_full_bases(reference_output(system), read(joinpath(dir, "output"), String))
++            # Truncation must fail instead of producing an apparently valid basis.
++            text = read(joinpath(dir, "input"), String)
++            write(joinpath(dir, "input"), text[1:end-2])
++            proc = run(pipeline(ignorestatus(Cmd([ENV["POLY_MOJO_DRIVER"], joinpath(dir, "input"), dir,
++                                                 "bad input", "1", mode, "true"])), stdout=devnull, stderr=devnull))
++            @test proc.exitcode != 0
++        end
++    end
++    # Runtime variable counts exercise both packed widths and the generic path.
++    for nvars in (9, 17)
++        _, variables = AbstractAlgebra.polynomial_ring(AbstractAlgebra.GF(1031),
++            ["x$i" for i in 1:nvars], internal_ordering=:degrevlex)
++        system = [variables[i] - i for i in 1:nvars]
++        for mode in ("plain", "certified")
++            mktempdir() do dir
++                generate_benchmark_file_for_polymojo(system, dir)
++                run(Cmd([ENV["POLY_MOJO_DRIVER"], joinpath(dir, "input"), dir,
++                         "many variables", "2", mode, "true"]))
++                @test compare_full_bases(reference_output(system), read(joinpath(dir, "output"), String))
++            end
++        end
++    end
++end
+diff --git a/scripts/benchmark_different_software/generate/polymojo/test_build.py b/scripts/benchmark_different_software/generate/polymojo/test_build.py
+new file mode 100644
+index 0000000..e52744c
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/test_build.py
+@@ -0,0 +1,105 @@
++"""Setup/cache tests; no Mojo installation or package downloads required."""
++
++from concurrent.futures import ThreadPoolExecutor
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++
++import build
++
++
++class BuildTests(unittest.TestCase):
++    def setUp(self):
++        self.directory = tempfile.TemporaryDirectory(prefix="poly mojo ")
++        self.addCleanup(self.directory.cleanup)
++        self.root = Path(self.directory.name)
++        self.prefix = self.root / "environment"
++        self.packages = self.prefix / "lib" / "mojo"
++        self.packages.mkdir(parents=True)
++        for name in build.PACKAGES:
++            (self.packages / name).write_text(name)
++        compiler = self.prefix / "bin" / "mojo"
++        compiler.parent.mkdir()
++        compiler.write_text(
++            f"#!{sys.executable}\n"
++            "import os, pathlib, sys\n"
++            "if sys.argv[1] == '--version':\n"
++            "    print(os.environ.get('TEST_VERSION', 'Mojo 1.2.0 (test)'))\n"
++            "else:\n"
++            "    with open(os.environ['TEST_BUILD_LOG'], 'a') as log: log.write('build\\n')\n"
++            "    output = pathlib.Path(sys.argv[sys.argv.index('-o') + 1])\n"
++            "    output.write_text('test executable')\n"
++            "    output.chmod(0o755)\n"
++            "    if os.environ.get('TEST_FAIL'): sys.exit(3)\n"
++        )
++        compiler.chmod(0o755)
++        self.log = self.root / "builds"
++        self.source = self.root / "driver.mojo"
++        self.source.write_text("test source")
++        self.env = {
++            "MOJO_COMMAND": str(compiler),
++            "TEST_BUILD_LOG": str(self.log),
++            "PATH": os.defpath,
++        }
++
++    def prepare(self):
++        return build.build_driver(
++            source=self.source, cache_dir=self.root / "cache", environ=self.env
++        )
++
++    def count(self):
++        return len(self.log.read_text().splitlines()) if self.log.exists() else 0
++
++    def test_installed_prefix_and_repeat(self):
++        first = self.prepare()
++        self.assertTrue(os.access(first, os.X_OK))
++        self.assertEqual(self.prepare(), first)
++        self.assertEqual(self.count(), 1)
++
++    def test_concurrent_setup_compiles_once(self):
++        with ThreadPoolExecutor(max_workers=2) as pool:
++            binaries = list(pool.map(lambda _: self.prepare(), range(2)))
++        self.assertEqual(binaries[0], binaries[1])
++        self.assertEqual(self.count(), 1)
++
++    def test_library_and_source_changes_invalidate_cache(self):
++        first = self.prepare()
++        (self.packages / "polynomials.mojoc").write_text("updated library")
++        second = self.prepare()
++        self.source.write_text("updated bridge")
++        third = self.prepare()
++        self.assertEqual(len({first, second, third}), 3)
++        self.assertEqual(self.count(), 3)
++
++    def test_explicit_packages_do_not_fall_back(self):
++        self.env["POLY_MOJO_PATH"] = str(self.root / "missing")
++        with self.assertRaisesRegex(build.SetupError, "Precompiled Poly Mojo packages"):
++            self.prepare()
++        self.assertEqual(self.count(), 0)
++
++    def test_wrong_compiler_version(self):
++        self.env["TEST_VERSION"] = "Mojo 1.1.0 (test)"
++        with self.assertRaisesRegex(build.SetupError, "requires Mojo 1.2.0"):
++            self.prepare()
++        self.assertEqual(self.count(), 0)
++
++    def test_missing_compiler(self):
++        self.env["MOJO_COMMAND"] = str(self.root / "missing-compiler")
++        with self.assertRaisesRegex(build.SetupError, "Mojo not found"):
++            self.prepare()
++
++    def test_failed_compilation_is_not_cached(self):
++        self.env["TEST_FAIL"] = "1"
++        with self.assertRaises(subprocess.CalledProcessError):
++            self.prepare()
++        self.assertEqual(list((self.root / "cache").glob("*/driver")), [])
++        del self.env["TEST_FAIL"]
++        self.assertTrue(self.prepare().is_file())
++        self.assertEqual(self.count(), 2)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/scripts/benchmark_different_software/generate/polymojo/test_runner.jl b/scripts/benchmark_different_software/generate/polymojo/test_runner.jl
+new file mode 100644
+index 0000000..33a3de1
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/test_runner.jl
+@@ -0,0 +1,59 @@
++using Test
++include("../../one_script_to_run_them_all.jl")
++
++@testset "Optional backend and certificate reporting" begin
++    @test "polymojo" in _available_backends
++    @test "polymojocertified" in _available_backends
++    @test length(comparison_columns(["groebner", "singular"])) == 2
++    @test length(comparison_columns(["groebner", "polymojocertified"])) == 3
++    small_prime_suite = get_benchmark_suite(2)
++    @test all("chandra $i" in first.(small_prime_suite.systems) for i in 11:14)
++    @test all(AbstractAlgebra.characteristic(base_ring(parent(first(system)))) == 1031
++              for (_, system) in small_prime_suite.systems)
++    args = Dict{String, Any}("backend" => "polymojo", "suite" => 0,
++        "bpolymojo" => ENV["POLY_MOJO_DRIVER"], "nruns" => 2,
++        "nworkers" => 1, "timeout" => 60, "validate" => "no")
++    @test isnothing(check_args(args))
++    invalid = merge(args, Dict("bpolymojo" => ""))
++    @test_throws ErrorException check_args(invalid)
++    # Other backends need no Mojo setting at all.
++    other = Dict{String, Any}("backend" => "groebner", "suite" => 0)
++    @test isnothing(check_args(other))
++
++    command = get_command_to_run_benchmark("polymojocertified", "dummy 1", 2, 0, true, args)
++    @test command.exec[1] == abspath(ENV["POLY_MOJO_DRIVER"])
++    @test command.exec[4:end] == ["dummy 1", "2", "certified", "true"]
++
++    # These outputs come from the upstream suite-0 CLI smoke runs.
++    names = ["dummy 1", "dummy 2"]
++    runtimes = Dict()
++    for backend in ("polymojo", "polymojocertified")
++        current = merge(args, Dict("backend" => backend))
++        runtimes[backend] = collect_timings(current, names)
++        @test all(haskey(runtimes[backend][name], :total_time) for name in names)
++        report = read(joinpath(@__DIR__, "../../results", backend, "benchmark_result_0.md"), String)
++        @test occursin("Verify certificate, s", report) == (backend == "polymojocertified")
++    end
++    combined = joinpath(@__DIR__, "../../results/benchmark_result_0.md")
++    original = isfile(combined) ? read(combined) : nothing
++    try
++        collect_all_timings(args, runtimes, names)
++        report = read(combined, String)
++        @test occursin("polymojocertified (verify)", report)
++        expected = CATEGORY_FORMAT[:verification_time](runtimes["polymojocertified"]["dummy 1"][:verification_time])
++        @test occursin(expected, report)
++        # A timed-out/missing case must display missing cells, not throw.
++        delete!(runtimes["polymojocertified"], "dummy 2")
++        collect_all_timings(args, runtimes, names)
++        row = only(filter(line -> startswith(line, "|dummy 2|"), readlines(combined)))
++        @test occursin("| - | - |", row)
++        collect_all_timings(args, Dict("polymojo" => runtimes["polymojo"]), names)
++        @test !occursin("verify", read(combined, String))
++    finally
++        if original === nothing
++            rm(combined, force=true)
++        else
++            write(combined, original)
++        end
++    end
++end
+diff --git a/scripts/benchmark_different_software/generate/polymojo/test_validation.jl b/scripts/benchmark_different_software/generate/polymojo/test_validation.jl
+new file mode 100644
+index 0000000..d7121b6
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/test_validation.jl
+@@ -0,0 +1,25 @@
++using Test
++include("validate.jl")
++
++@testset "Complete output comparison" begin
++    expected = "x,y\n0\nx + y,\ny^2 - 1\n"
++    @test compare_full_bases(expected, "x,y\n0\ny^2 - 1,\ny + x\n")
++    @test !compare_full_bases(expected, "x,y\n0\nx - y,\ny^2 - 1\n")
++    @test !compare_full_bases(expected, "x,y\n0\ny^2 - 1\n")
++    @test !compare_full_bases(expected, "x,y\n7\nx + y,\ny^2 - 1\n")
++    @test !compare_full_bases(expected, "y,x\n0\nx + y,\ny^2 - 1\n")
++    @test !compare_full_bases(expected, "x,y\n0\n2*x + 2*y,\ny^2 - 1\n")
++    @test compare_full_bases("x\n0\nx + 1/2\n", "x\n0\nx + 2/4\n")
++end
++
++@testset "Reference outputs up to nonzero scalar factors" begin
++    expected = "x,y\n0\nx + y,\ny^2 - 1\n"
++    @test compare_full_bases(expected, "x,y\n0\n-3*y^2 + 3,\n2*x + 2*y\n"; normalize_monic=true)
++    @test !compare_full_bases(expected, "x,y\n0\n2*x - 2*y,\ny^2 - 1\n"; normalize_monic=true)
++    @test !compare_full_bases(expected, "x,y\n0\ny^2 - 1\n"; normalize_monic=true)
++    @test !compare_full_bases(expected, "x,y\n7\nx + y,\ny^2 - 1\n"; normalize_monic=true)
++    @test !compare_full_bases(expected, "y,x\n0\nx + y,\ny^2 - 1\n"; normalize_monic=true)
++    @test compare_full_bases("x\n7\nx + 1\n", "x\n7\n3*x + 3\n"; normalize_monic=true)
++    @test compare_full_bases("x\n0\n0\n", "x\n0\n0\n"; normalize_monic=true)
++    @test !compare_full_bases("x\n0\nx\n", "x\n0\nx,\n2*x\n"; normalize_monic=true)
++end
+diff --git a/scripts/benchmark_different_software/generate/polymojo/validate.jl b/scripts/benchmark_different_software/generate/polymojo/validate.jl
+new file mode 100644
+index 0000000..eaa2a23
+--- /dev/null
++++ b/scripts/benchmark_different_software/generate/polymojo/validate.jl
+@@ -0,0 +1,35 @@
++# Additional validation; the upstream SHA routine only retains its last basis polynomial.
++import Nemo
++include("../layman_parser.jl")
++
++function full_basis_signature(text; normalize_monic=false)
++    ring, basis = parse_system_naive(text)
++    field = string(Nemo.characteristic(Nemo.base_ring(ring)))
++    variables = string.(Nemo.gens(ring))
++    # The parser constructs canonical Nemo polynomials in the same explicit
++    # degrevlex order. Compare every coefficient and monomial, allowing only a
++    # permutation of the output basis, not omitted elements. Some reference
++    # backends emit primitive integer polynomials over QQ; explicitly opt in
++    # to monic normalization when comparing those outputs.
++    if normalize_monic
++        basis = [iszero(f) ? f : Nemo.divexact(f, Nemo.leading_coefficient(f)) for f in basis]
++    end
++    return (field, variables, sort(string.(basis)))
++end
++
++function compare_full_bases(reference, candidate; normalize_monic=false)
++    full_basis_signature(reference; normalize_monic) ==
++        full_basis_signature(candidate; normalize_monic)
++end
++
++if abspath(PROGRAM_FILE) == @__FILE__
++    normalize_monic = !isempty(ARGS) && first(ARGS) == "--normalize-monic"
++    paths = normalize_monic ? ARGS[2:end] : ARGS
++    length(paths) >= 2 || error("usage: validate.jl [--normalize-monic] REFERENCE_OUTPUT CANDIDATE_OUTPUT ...")
++    reference = full_basis_signature(read(first(paths), String); normalize_monic)
++    for candidate in paths[2:end]
++        reference == full_basis_signature(read(candidate, String); normalize_monic) ||
++            error("Full basis mismatch: $candidate")
++        println("Full basis matches: $candidate")
++    end
++end
+diff --git a/scripts/benchmark_different_software/generate/singular/run_in_singular.jl b/scripts/benchmark_different_software/generate/singular/run_in_singular.jl
+index 1a6c4ba..85fe0a8 100644
+--- a/scripts/benchmark_different_software/generate/singular/run_in_singular.jl
++++ b/scripts/benchmark_different_software/generate/singular/run_in_singular.jl
+@@ -42,7 +42,7 @@ function aa_system_to_singular(system)
+         R_s, _ = Singular.polynomial_ring(
+             ground_s,
+             map(string, symbols(R)),
+-            internal_ordering=:degrevlex
++            ordering=:degrevlex
+         )
+         system_s = map(
+             f -> AbstractAlgebra.change_base_ring(
+@@ -57,7 +57,7 @@ function aa_system_to_singular(system)
+         R_s, _ = Singular.polynomial_ring(
+             ground_s,
+             map(string, symbols(R)),
+-            internal_ordering=:degrevlex
++            ordering=:degrevlex
+         )
+         system_s = map(
+             f -> AbstractAlgebra.change_base_ring(
+diff --git a/scripts/benchmark_different_software/generate/utils.jl b/scripts/benchmark_different_software/generate/utils.jl
+index 485ece4..3ce867d 100644
+--- a/scripts/benchmark_different_software/generate/utils.jl
++++ b/scripts/benchmark_different_software/generate/utils.jl
+@@ -24,7 +24,8 @@ const TIME_CATEGORIES = [
+     :total_time_learn,
+     :total_time_apply,
+     :total_time_apply_4x,
+-    :total_time_apply_8x
++    :total_time_apply_8x,
++    :verification_time
+ ]
+ const DATA_CATEGORIES = []
+ const ALL_CATEGORIES = union(TIME_CATEGORIES, DATA_CATEGORIES)
+@@ -35,7 +36,8 @@ const HUMAN_READABLE_CATEGORIES = Dict(
+     :total_time_apply => "Apply, s",
+     :total_time_apply_4x => "Apply 4x, s",
+     :total_time_apply_8x => "Apply 8x, s",
+-    :total_time_F4 => "F4, s"
++    :total_time_F4 => "F4, s",
++    :verification_time => "Verify certificate, s"
+ )
+ const CATEGORY_FORMAT = Dict()
+ for cat in ALL_CATEGORIES
+@@ -46,8 +48,25 @@ for cat in ALL_CATEGORIES
+     end
+ end
+ 
++# Verification is supplementary, not part of the comparison's computation time.
++CATEGORY_FORMAT[:verification_time] = val -> val isa Real ? @sprintf("%.6g", val) : string(val)
++
++function comparison_columns(backends)
++    columns = [(backend=backend, target=:total_time, label=backend) for backend in backends]
++    if "polymojocertified" in backends
++        push!(columns, (backend="polymojocertified", target=:verification_time,
++                        label="polymojocertified (verify)"))
++    end
++    columns
++end
++
+ # Code templates
+ function julia_pkg_preamble(dir)
++    # A pre-instantiated environment can be shared by the controller and workers.
++    if haskey(ENV, "BENCHMARK_JULIA_ENV")
++        Pkg.activate(ENV["BENCHMARK_JULIA_ENV"])
++        return nothing
++    end
+     @info "Activating environment at $dir"
+     Pkg.activate(dir)
+     Pkg.Registry.add("General")
+diff --git a/scripts/benchmark_different_software/one_script_to_run_them_all.jl b/scripts/benchmark_different_software/one_script_to_run_them_all.jl
+index b2f4eba..0ea49c1 100644
+--- a/scripts/benchmark_different_software/one_script_to_run_them_all.jl
++++ b/scripts/benchmark_different_software/one_script_to_run_them_all.jl
+@@ -19,6 +19,7 @@ include("benchmark_systems.jl")
+ 
+ # Load the code to generate benchmarks for different software
+ include("generate/benchmark_generators.jl")
++include("generate/polymojo/generate.jl")
+ 
+ # Load the code to compute the certificate of a groebner basis
+ include("generate/basis_certificate.jl")
+@@ -31,7 +32,7 @@ const _progressbar_color = :light_green
+ const _progressbar_value_color = :light_green
+ progressbar_enabled() = Logging.Info <= Logging.min_enabled_level(current_logger()) < Logging.Warn
+ 
+-const _available_backends = ["groebner", "singular", "maplefgb", "mgb", "msolve", "openf4"]
++const _available_backends = ["groebner", "singular", "maplefgb", "mgb", "msolve", "openf4", "polymojo", "polymojocertified"]
+ 
+ const _skip_singular = false
+ const _skip_openf4 = false
+@@ -52,6 +53,8 @@ function parse_commandline()
+             - mgb
+             - msolve
+             - openf4
++            - polymojo
++            - polymojocertified
+             - ALL"""
+             arg_type = String
+             required = true
+@@ -76,6 +79,10 @@ function parse_commandline()
+             arg_type = String
+             default = "msolve"
+             required = false
++        "--bpolymojo"
++            help = "Prebuilt Poly Mojo benchmark bridge; compile it before running cases."
++            arg_type = String
++            default = get(ENV, "POLY_MOJO_DRIVER", "")
+         "--suite"
+             help = """
+             The index of the benchmark suite.
+@@ -115,7 +122,9 @@ end
+ #! format: on
+ 
+ function generate_benchmark_file(backend, name, system, dir, validate, nruns, time_filename, args)
+-    if backend == "groebner"
++    if backend in ("polymojo", "polymojocertified")
++        generate_benchmark_file_for_polymojo(system, dir)
++    elseif backend == "groebner"
+         benchmark_source = generate_benchmark_source_for_groebner(
+             name,
+             system,
+@@ -192,7 +201,12 @@ function get_command_to_run_benchmark(
+     validate,
+     args
+ )
+-    if backend == "groebner"
++    if backend in ("polymojo", "polymojocertified")
++        dir = joinpath(@__DIR__, get_benchmark_dir(backend, problem_set_id), problem_name)
++        mode = backend == "polymojocertified" ? "certified" : "plain"
++        return Cmd([abspath(args["bpolymojo"]), joinpath(dir, "input"), dir,
++                    problem_name, string(problem_num_runs), mode, string(validate)])
++    elseif backend == "groebner"
+         return Cmd([
+             "julia",
+             (@__DIR__) * "/generate/groebner/run_in_groebner.jl",
+@@ -589,6 +603,8 @@ function collect_timings(args, names)
+             :total_time_apply_4x,
+             :total_time_apply_8x
+         ]
++    elseif backend == "polymojocertified"
++        targets = [:total_time, :verification_time]
+     else
+         targets = [:total_time]
+     end
+@@ -777,36 +793,36 @@ function collect_all_timings(args, runtimes, systems)
+     \t$(join(map(string, backends), "\n\t"))
+     """
+ 
+-    _target = targets[1]
+-    formatting_style = CATEGORY_FORMAT[_target]
++    columns = comparison_columns(backends)
++    compute_columns = [i + 1 for (i, col) in enumerate(columns) if col.target == :total_time]
+     conf = set_pt_conf(tf=tf_markdown, alignment=:c)
+     title = "Benchmark results"
+-    header = vcat("System", backends)
++    header = vcat("System", [col.label for col in columns])
+     vec_of_vecs = Vector{Vector{Any}}()
+     for name in systems
+         row = [name]
+-        for backend in backends
+-            if haskey(runtimes[backend], name) && haskey(runtimes[backend][name], _target)
+-                push!(row, formatting_style(runtimes[backend][name][_target]))
++        for col in columns
++            if haskey(runtimes[col.backend], name) && haskey(runtimes[col.backend][name], col.target)
++                push!(row, CATEGORY_FORMAT[col.target](runtimes[col.backend][name][col.target]))
+             else
+                 push!(row, "-")
+             end
+         end
+         push!(vec_of_vecs, row)
+     end
+-    table = Array{Any, 2}(undef, length(vec_of_vecs), length(backends) + 1)
++    table = Array{Any, 2}(undef, length(vec_of_vecs), length(columns) + 1)
+     for i in 1:length(vec_of_vecs)
+-        for j in 1:(length(backends) + 1)
++        for j in 1:(length(columns) + 1)
+             table[i, j] = vec_of_vecs[i][j]
+         end
+     end
+     println()
+     h1 = Highlighter(
+         (data, i, j) ->
+-            j > 1 &&
++            j in compute_columns &&
+             strip(data[i, j]) != "-" &&
+             parse(Float64, data[i, j]) ==
+-            minimum(map(x -> parse(Float64, x), filter(x -> strip(x) != "-", data[i, 2:end]))),
++            minimum(map(x -> parse(Float64, x), filter(x -> strip(x) != "-", data[i, compute_columns]))),
+         bold=true
+     )
+     pretty_table_with_conf(
+@@ -839,21 +855,16 @@ function collect_all_timings(args, runtimes, systems)
+ 
+     """
+ 
+-    makecolname(target) = HUMAN_READABLE_CATEGORIES[target]
+-    columns = backends
+-    resulting_md *= "|Model|" * join(map(string, columns), "|") * "|\n"
++    resulting_md *= "|Model|" * join([col.label for col in columns], "|") * "|\n"
+     resulting_md *= "|:----|" * join(["---" for _ in columns], "|") * "|\n"
+     for name in systems
+         resulting_md *= "|$name|"
+-        for backend in backends
+-            model_data = runtimes[backend][name]
+-            for target in targets
+-                if !haskey(model_data, target)
+-                    resulting_md *= " - " * "|"
+-                else
+-                    formatting_style = CATEGORY_FORMAT[target]
+-                    resulting_md *= formatting_style(model_data[target]) * "|"
+-                end
++        for col in columns
++            model_data = get(runtimes[col.backend], name, Dict())
++            if !haskey(model_data, col.target)
++                resulting_md *= " - " * "|"
++            else
++                resulting_md *= CATEGORY_FORMAT[col.target](model_data[col.target]) * "|"
+             end
+         end
+         resulting_md *= "\n"
+@@ -886,7 +897,13 @@ end
+ function check_args(args)
+     backend = args["backend"]
+     @assert backend in
+-            ("groebner", "singular", "maplefgb", "mgb", "openf4", "msolve", "learn_apply", "ALL")
++            ("groebner", "singular", "maplefgb", "mgb", "openf4", "msolve", "learn_apply", "polymojo", "polymojocertified", "ALL")
++    if backend in ("polymojo", "polymojocertified")
++        driver = args["bpolymojo"]
++        !isempty(driver) && Sys.which(abspath(driver)) !== nothing || error(
++            "Set --bpolymojo or POLY_MOJO_DRIVER to the executable produced by generate/polymojo/build.py"
++        )
++    end
+     if backend == "openf4" && args["suite"] in [3, 7]
+         throw("Running benchmarks over the rationals is not possible for openf4")
+     end
+@@ -970,4 +987,6 @@ function main()
+     end
+ end
+ 
+-main()
++if abspath(PROGRAM_FILE) == @__FILE__
++    main()
++end

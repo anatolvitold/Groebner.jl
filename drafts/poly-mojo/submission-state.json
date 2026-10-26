@@ -1,0 +1,29 @@
+{
+  "state": "awaiting-community-package",
+  "fork": "anatolvitold/Groebner.jl",
+  "code_branch": "feat/poly-mojo",
+  "review_branch": "drafts/poly-mojo",
+  "upstream": "sumiya11/Groebner.jl",
+  "base_branch": "master",
+  "intended_release": "poly_mojo==1.0.1",
+  "mojo_version": "1.2.0",
+  "apn_mojo_version": "1.0.2",
+  "submission_authorized": true,
+  "authorization_condition": "After community-channel publication, pin the released package, verify a fresh installation, and submit the PR. No further approval requested.",
+  "channel_pr": "https://github.com/modular/modular-community/pull/431",
+  "channel_status": "PR open; pixi search returns only poly_mojo 1.0.0 for linux-64",
+  "checked_utc": "2026-10-26T09:30:28.009768+00:00",
+  "upstream_pr": null,
+  "code_commit": "b91758e99feb4b9d0693d05f0b0a93812e60cbc8",
+  "focused_checks": {
+    "passed_assertions": 73,
+    "package_installation_verified": false,
+    "suite_0_smoke_backends": [
+      "polymojo",
+      "polymojocertified",
+      "singular"
+    ],
+    "msolve_rational_full_basis_match": true
+  },
+  "prepared_utc": "2026-10-26T09:33:47.839105+00:00"
+}

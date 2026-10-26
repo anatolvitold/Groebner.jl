@@ -1,0 +1,87 @@
+suite	field	problem
+1	Integers modulo 2^30 + 3	dummy
+1	Integers modulo 2^30 + 3	cyclic 7
+1	Integers modulo 2^30 + 3	cyclic 8
+1	Integers modulo 2^30 + 3	cyclic 9
+1	Integers modulo 2^30 + 3	katsura 10
+1	Integers modulo 2^30 + 3	katsura 11
+1	Integers modulo 2^30 + 3	katsura 12
+1	Integers modulo 2^30 + 3	katsura 13
+1	Integers modulo 2^30 + 3	eco 11
+1	Integers modulo 2^30 + 3	eco 12
+1	Integers modulo 2^30 + 3	eco 13
+1	Integers modulo 2^30 + 3	eco 14
+1	Integers modulo 2^30 + 3	noon 7
+1	Integers modulo 2^30 + 3	noon 8
+1	Integers modulo 2^30 + 3	noon 9
+1	Integers modulo 2^30 + 3	noon 10
+1	Integers modulo 2^30 + 3	henrion 5
+1	Integers modulo 2^30 + 3	henrion 6
+1	Integers modulo 2^30 + 3	henrion 7
+1	Integers modulo 2^30 + 3	henrion 8
+1	Integers modulo 2^30 + 3	reimer 6
+1	Integers modulo 2^30 + 3	reimer 7
+1	Integers modulo 2^30 + 3	reimer 8
+1	Integers modulo 2^30 + 3	Cholera
+1	Integers modulo 2^30 + 3	HIV2
+1	Integers modulo 2^30 + 3	NFkB (w.)
+1	Integers modulo 2^30 + 3	Goodwin (w.)
+1	Integers modulo 2^30 + 3	yang1
+1	Integers modulo 2^30 + 3	bayes148
+1	Integers modulo 2^30 + 3	gametwo2
+1	Integers modulo 2^30 + 3	jason210
+1	Integers modulo 2^30 + 3	alea6
+1	Integers modulo 2^30 + 3	mayr42
+1	Integers modulo 2^30 + 3	BIOMD0000000103
+1	Integers modulo 2^30 + 3	BIOMD0000000123
+2	Integers modulo 1031	dummy
+2	Integers modulo 1031	cyclic 7
+2	Integers modulo 1031	cyclic 8
+2	Integers modulo 1031	cyclic 9
+2	Integers modulo 1031	katsura 10
+2	Integers modulo 1031	katsura 11
+2	Integers modulo 1031	katsura 12
+2	Integers modulo 1031	katsura 13
+2	Integers modulo 1031	eco 11
+2	Integers modulo 1031	eco 12
+2	Integers modulo 1031	eco 13
+2	Integers modulo 1031	eco 14
+2	Integers modulo 1031	noon 7
+2	Integers modulo 1031	noon 8
+2	Integers modulo 1031	noon 9
+2	Integers modulo 1031	noon 10
+2	Integers modulo 1031	henrion 5
+2	Integers modulo 1031	henrion 6
+2	Integers modulo 1031	henrion 7
+2	Integers modulo 1031	henrion 8
+2	Integers modulo 1031	reimer 6
+2	Integers modulo 1031	reimer 7
+2	Integers modulo 1031	reimer 8
+2	Integers modulo 1031	chandra 11
+2	Integers modulo 1031	chandra 12
+2	Integers modulo 1031	chandra 13
+2	Integers modulo 1031	chandra 14
+3	The rationals	dummy
+3	The rationals	cyclic 7
+3	The rationals	cyclic 8
+3	The rationals	katsura 9
+3	The rationals	katsura 10
+3	The rationals	katsura 11
+3	The rationals	eco 10
+3	The rationals	eco 11
+3	The rationals	eco 12
+3	The rationals	eco 13
+3	The rationals	noon 7
+3	The rationals	noon 8
+3	The rationals	noon 9
+3	The rationals	henrion 6
+3	The rationals	henrion 7
+3	The rationals	reimer 6
+3	The rationals	reimer 7
+3	The rationals	reimer 8
+3	The rationals	chandra 9
+3	The rationals	chandra 10
+3	The rationals	chandra 11
+3	The rationals	chandra 12
+3	The rationals	chandra 13
+3	The rationals	ipp
