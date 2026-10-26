@@ -96,6 +96,13 @@ coefficient and monomial, allowing only permutation of basis elements. It does
 not rely on the runner's stored fingerprints. No fingerprint files are changed
 by this comparison tool.
 
+Some reference backends, including msolve over QQ, emit primitive integer
+polynomials instead of monic polynomials. Use `validate.jl --normalize-monic
+REFERENCE_OUTPUT POLYMOJO_OUTPUT` to allow nonzero scalar multiples of each basis
+element. Field, variable order, basis size, and every normalized coefficient and
+monomial must still agree. This option compares bases up to scalar normalization;
+the default strict mode also checks that the output coefficients agree directly.
+
 Tests against an activated Julia benchmark environment:
 
 ```sh
