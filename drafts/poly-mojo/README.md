@@ -1,10 +1,10 @@
 # Poly Mojo benchmark contribution
 
-**Status: prepared for the owner's fork; upstream submission awaits the community-channel Poly Mojo 1.0.1 package and its installation checks.**
+**Status: published-package validation complete; ready for upstream submission.**
 
 The implementation is on `feat/poly-mojo` in
 [`anatolvitold/Groebner.jl`](https://github.com/anatolvitold/Groebner.jl/tree/feat/poly-mojo).
-The prepared code commit is `b91758e99feb4b9d0693d05f0b0a93812e60cbc8`.
+The prepared code commit is `a2b398491a72ec137f0fb61d216ca06dd27f642b`.
 The proposed PR targets `sumiya11/Groebner.jl:master`, currently at
 `751c90b0dd9415bab2b56980b0b34b59497ff856` (Groebner.jl 0.10.12).
 This `drafts/poly-mojo` branch preserves review materials separately from the
@@ -19,7 +19,7 @@ been opened.
 - [PR title](title.txt) and [PR description](pull-request.md)
 - [Validation record](validation.md)
 - [Complete three-suite comparison](comparison-120/README.md)
-- [Release environment template](release-environment.toml.in)
+- [Pinned release environment](https://github.com/anatolvitold/Groebner.jl/tree/feat/poly-mojo/scripts/benchmark_different_software/generate/polymojo/environment)
 - [Remaining release and submission steps](submission.md)
 - [Machine-readable state](submission-state.json)
 - [Separate fingerprint issue draft](fingerprint-issue.md)
@@ -45,15 +45,12 @@ upstream contribution.
 
 ## Package status
 
-The GitHub v1.0.1 release is published, but that is distinct from the community
-channel package. The channel update is
-[modular/modular-community#431](https://github.com/modular/modular-community/pull/431).
-At preparation time it is open, and the package manager lists Poly Mojo 1.0.0.
-Do not use that older package: it targets Mojo 1.1 and APN Mojo 1.0.1.
+Community-channel Poly Mojo 1.0.1 and APN Mojo 1.0.2, both build `hb0f4dca_0`,
+are installed and verified with Mojo 1.2.0 in the code branch's pinned environment.
+All 74 focused checks and three suite-0 smoke runs pass. Setup discovers the
+installed modules directly; no library source checkout or build is required.
 
-The intended environment is Poly Mojo 1.0.1, Mojo 1.2.0, and APN Mojo 1.0.2.
-The template is deliberately not a resolved manifest or lockfile. The current
-tests and comparisons used precompiled source packages with library source
-identical to v1.0.1; they do not substitute for testing the installed release.
+The [release validation records](release-checks/) are separate from the earlier
+source-based benchmark results, which were not rerun for this packaging step.
 
 Commits use Anatoly Vitold Stankyavichyus `<anatolyvitold@outlook.com>`.

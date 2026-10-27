@@ -1,5 +1,5 @@
 {
-  "state": "awaiting-community-package",
+  "state": "ready-for-pr",
   "fork": "anatolvitold/Groebner.jl",
   "code_branch": "feat/poly-mojo",
   "review_branch": "drafts/poly-mojo",
@@ -11,19 +11,72 @@
   "submission_authorized": true,
   "authorization_condition": "After community-channel publication, pin the released package, verify a fresh installation, and submit the PR. No further approval requested.",
   "channel_pr": "https://github.com/modular/modular-community/pull/431",
-  "channel_status": "PR open; pixi search returns only poly_mojo 1.0.0 for linux-64",
-  "checked_utc": "2026-10-26T09:30:28.009768+00:00",
+  "channel_status": "poly_mojo 1.0.1 hb0f4dca_0 is published for linux-64",
+  "checked_utc": "2026-10-27T18:53:49.505510+00:00",
   "upstream_pr": null,
-  "code_commit": "b91758e99feb4b9d0693d05f0b0a93812e60cbc8",
+  "code_commit": "a2b398491a72ec137f0fb61d216ca06dd27f642b",
   "focused_checks": {
-    "passed_assertions": 73,
-    "package_installation_verified": false,
+    "passed_assertions": 74,
+    "package_installation_verified": true,
     "suite_0_smoke_backends": [
       "polymojo",
       "polymojocertified",
-      "singular"
+      "groebner"
     ],
-    "msolve_rational_full_basis_match": true
+    "msolve_rational_full_basis_match": true,
+    "relative_setup_cache_reuse": true
   },
-  "prepared_utc": "2026-10-26T09:33:47.839105+00:00"
+  "prepared_utc": "2026-10-26T09:33:47.839105+00:00",
+  "package_record": {
+    "prefix": "/workspace/groebner-contribution/scripts/benchmark_different_software/generate/polymojo/environment/.pixi/envs/default",
+    "packages": [
+      {
+        "name": "apn_mojo",
+        "version": "1.0.2",
+        "build": "hb0f4dca_0",
+        "channel": "https://repo.prefix.dev/modular-community/",
+        "url": "https://repo.prefix.dev/modular-community/linux-64/apn_mojo-1.0.2-hb0f4dca_0.conda",
+        "sha256": "871130cf411a9b58456a3068c4c9190740b4d02c93cbf30c8b8bec1fa15bb634"
+      },
+      {
+        "name": "poly_mojo",
+        "version": "1.0.1",
+        "build": "hb0f4dca_0",
+        "channel": "https://repo.prefix.dev/modular-community/",
+        "url": "https://repo.prefix.dev/modular-community/linux-64/poly_mojo-1.0.1-hb0f4dca_0.conda",
+        "sha256": "daf89251b30328f160cc56375929b125da3c93a2cf0cec52795c7ff38119c458"
+      },
+      {
+        "name": "python",
+        "version": "3.12.16",
+        "build": "h5f976f7_0_cpython",
+        "channel": "https://conda.anaconda.org/conda-forge/",
+        "url": "https://conda.anaconda.org/conda-forge/linux-64/python-3.12.16-h5f976f7_0_cpython.conda",
+        "sha256": "a40188b47c3995bc42a33820be4d780af5c11cc295409413fb925549f0abfe92"
+      },
+      {
+        "name": "mojo-compiler",
+        "version": "1.2.0",
+        "build": "release",
+        "channel": "https://conda.modular.com/max/",
+        "url": "https://conda.modular.com/max/linux-64/mojo-compiler-1.2.0-release.conda",
+        "sha256": "a746d7db173a9882e7073ae6d905acfe383a754faecb4a53710b7b90db377e6b"
+      },
+      {
+        "name": "mojo",
+        "version": "1.2.0",
+        "build": "release",
+        "channel": "https://conda.modular.com/max/",
+        "url": "https://conda.modular.com/max/linux-64/mojo-1.2.0-release.conda",
+        "sha256": "18485673c7089a187107633a0b9086c5fcb2f0fbe5daf67af44490271e6a2e57"
+      }
+    ],
+    "modules": {
+      "std.mojoc": "be760e71e17bb9252981292aea1209bdea430fc2be14ad1a5db2fd35381ef329",
+      "polynomials.mojoc": "c896926d8ea0cc5e50dececbe6e498a4854bc868affbdf934ba75e6b68b69cee",
+      "poly.mojoc": "d77c3effa7c1bf99764aaa738aa0ddf8dd0e74e8b63862d0157840186586794c",
+      "apn_mojo.mojoc": "53145dacd8b895ab3a6b3d9119a8121f44bc03e10978b68ebaa1feeb8b603965"
+    }
+  },
+  "released_driver_sha256": "cc1f2d869db34a080df9d4c335533100edf758c12831bf0c9ee7c375a7a207ca"
 }

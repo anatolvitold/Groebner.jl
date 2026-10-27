@@ -1,0 +1,12 @@
+{
+  "compiler": "/workspace/groebner-contribution/scripts/benchmark_different_software/generate/polymojo/environment/.pixi/envs/default/bin/mojo",
+  "version": "Mojo 1.2.0 (2016d0cd)",
+  "modular_home": "/workspace/groebner-contribution/scripts/benchmark_different_software/generate/polymojo/environment/.pixi/envs/default/share/max",
+  "platform": "Linux",
+  "machine": "x86_64",
+  "source": "d0b7c5207fb4857181cea2c3c8c10438536ae6b2a1210f96a9a356792f2847e1",
+  "packages": {
+    "apn_mojo.mojoc": "53145dacd8b895ab3a6b3d9119a8121f44bc03e10978b68ebaa1feeb8b603965",
+    "polynomials.mojoc": "c896926d8ea0cc5e50dececbe6e498a4854bc868affbdf934ba75e6b68b69cee"
+  }
+}

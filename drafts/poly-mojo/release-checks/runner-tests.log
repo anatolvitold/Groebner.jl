@@ -1,0 +1,71 @@
+  Activating project at `/workspace/groebner-comparison/.local/environment`
+[ Info: Loading benchmark models..
+
+┌ Info: Collecting results for polymojo. Statistics of interest:
+└ 	total_time
+
+Benchmark results, polymojo
+|  Model  | Total, s |
+|---------|----------|
+| dummy 1 |   0.00   |
+| dummy 2 |   0.00   |
+
+Table with results is written to /workspace/groebner-contribution/scripts/benchmark_different_software/results/polymojo/benchmark_result_0.md
+
+┌ Info: Collecting results for polymojocertified. Statistics of interest:
+│ 	total_time
+└ 	verification_time
+
+Benchmark results, polymojocertified
+|  Model  | Total, s | Verify certificate, s |
+|---------|----------|-----------------------|
+| dummy 1 |   0.00   |      1.4282e-05       |
+| dummy 2 |   0.00   |      1.4573e-05       |
+
+Table with results is written to /workspace/groebner-contribution/scripts/benchmark_different_software/results/polymojocertified/benchmark_result_0.md
+
+┌ Info: Collecting all results. Statistics of interest:
+│ 	total_time
+│ Present backends:
+│ 	polymojo
+└ 	polymojocertified
+
+Benchmark results
+| System  | polymojo | polymojocertified | polymojocertified (verify) |
+|---------|----------|-------------------|----------------------------|
+| dummy 1 |   0.00   |       0.00        |         1.4282e-05         |
+| dummy 2 |   0.00   |       0.00        |         1.4573e-05         |
+All results are in seconds.
+
+Table with results is written to /workspace/groebner-contribution/scripts/benchmark_different_software/results/benchmark_result_0.md
+
+┌ Info: Collecting all results. Statistics of interest:
+│ 	total_time
+│ Present backends:
+│ 	polymojo
+└ 	polymojocertified
+
+Benchmark results
+| System  | polymojo | polymojocertified | polymojocertified (verify) |
+|---------|----------|-------------------|----------------------------|
+| dummy 1 |   0.00   |       0.00        |         1.4282e-05         |
+| dummy 2 |   0.00   |         -         |             -              |
+All results are in seconds.
+
+Table with results is written to /workspace/groebner-contribution/scripts/benchmark_different_software/results/benchmark_result_0.md
+
+┌ Info: Collecting all results. Statistics of interest:
+│ 	total_time
+│ Present backends:
+└ 	polymojo
+
+Benchmark results
+| System  | polymojo |
+|---------|----------|
+| dummy 1 |   0.00   |
+| dummy 2 |   0.00   |
+All results are in seconds.
+
+Table with results is written to /workspace/groebner-contribution/scripts/benchmark_different_software/results/benchmark_result_0.md
+Test Summary:                              | Pass  Total   Time
+Optional backend and certificate reporting |   19     19  11.3s

@@ -1,8 +1,12 @@
 # Validation record
 
-Updated October 26, 2026 (America/New_York). This record covers precompiled
-source packages with library source identical to GitHub v1.0.1. Validation of
-the installed community-channel 1.0.1 package remains pending.
+Updated October 27, 2026 (America/New_York). The focused checks below now pass
+against freshly installed community-channel `poly_mojo==1.0.1` and
+`apn_mojo==1.0.2`, both build `hb0f4dca_0`, with Mojo 1.2.0. The checked-in Pixi
+lockfile records the complete environment. No source-package override was used.
+[Installed-package records and focused logs](release-checks/) preserve the exact
+compiler and module hashes. The full three-suite comparison remains the earlier
+source-based run and was not repeated for this package check.
 
 ## Versions and artifacts
 
@@ -17,33 +21,35 @@ the installed community-channel 1.0.1 package remains pending.
 - Linux x86-64. The Julia archive's libopenlibm executable-stack flag had
   previously been cleared for compatibility with this environment's kernel.
 
-The bridge was built once against the existing library packages and reused.
-Its SHA-256 is `606f2f88baf75716fc6468601690dd0a81c86f0d4b920a1e5566dcb73d59b082`.
-No library rebuild occurred. Earlier repeated setup and a simulated installed
-`CONDA_PREFIX/lib/mojo` layout returned the same cached executable. That
-simulation used links to source-built artifacts, not an actual channel install.
+The earlier source-based comparison reused bridge SHA-256
+`606f2f88baf75716fc6468601690dd0a81c86f0d4b920a1e5566dcb73d59b082`.
+The released-package bridge and compiler/module provenance are recorded in
+`submission-state.json` and `release-checks/build.json`. No library rebuild was
+needed. Fresh-installation checks found and fixed a relative-path cache issue;
+Pixi task setup and direct setup now reuse the same executable without recompiling.
 
 ## Focused checks
 
-The following checks were rerun while preparing the fork submission:
+The following checks passed against the released-package setup:
 
 | Check | Passing assertions |
 |---|---:|
-| Python setup/cache | 7 |
+| Python setup/cache, including relative CLI paths | 8 |
 | Real Mojo bridge: coefficients, fields, dimensions, modes, malformed input | 32 |
 | Complete-basis comparator, including optional scalar normalization | 15 |
 | Optional backends, suite-2 loading, and native reports | 19 |
-| **Total** | **73** |
+| **Total** | **74** |
 
-[Logs](checks/) are retained in this review branch with terminal control codes
+[Current logs](release-checks/) and [earlier source-check logs](checks/) are retained
+in this review branch with terminal control codes
 removed; recorded timings and assertions are unchanged. The new normalization checks
 accept rational and finite-field scalar multiples while rejecting changed
 polynomials, missing or duplicated elements, different fields, and variable
 orders. Default strict comparison continues to reject rescaling.
 
-Suite-0 CLI smoke runs passed in ordinary Poly Mojo, certified Poly Mojo, and
-Singular modes, with one worker and two measured repetitions. Earlier Groebner.jl
-suite-0 checks also passed. These smoke runs are integration checks, not performance
+Released-package suite-0 CLI smoke runs passed in ordinary Poly Mojo, certified
+Poly Mojo, and Groebner.jl modes, with one worker and two measured repetitions.
+Earlier Singular suite-0 checks also passed. These smoke runs are integration checks, not performance
 claims. The normalized comparison CLI matched the existing rational Cyclic 7
 outputs from msolve and Poly Mojo without rerunning the algorithms.
 
@@ -90,17 +96,15 @@ compute timers exclude conversion and output. Completion limits apply to the
 whole process, not to each individual computation. These differences and all
 failures/timeouts are retained in the report.
 
-## Remaining installation check
+## Scope of validation
 
-Pin `poly_mojo==1.0.1` after community publication, generate the release lockfile,
-and rerun the focused tests against a fresh installed package without source
-fallbacks. Record the exact resolved package builds. The full-suite source results
-remain valid evidence for that source revision; they are not an installed-package
-benchmark and should not be relabeled as one.
+The installed packages passed focused tests and smoke checks. The full-suite
+source results remain evidence for their recorded source revision; they have not
+been relabeled as an installed-package benchmark. Only Linux x86-64 was tested.
 
 The older bundled Groebner.jl 0.7 environment retains its original single-thread
 call path but has not been revalidated. The tested submission target is the current
 0.10.12 checkout. No broad compatibility claim is made for the older environment.
 
-The owner has authorized submission after the package check. The separate
+The package check is complete, and upstream submission is authorized. The separate
 fingerprint issue and reference-fingerprint migration remain outside this PR.

@@ -1,0 +1,815 @@
+  Activating project at `/workspace/groebner-comparison/.local/environment`
+[ Info: Loading benchmark models..
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 1.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 2.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 2.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 3.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 3.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 4.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 4.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 4.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 5.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 5.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 6.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 6.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 6.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 7.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 7.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 8.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 8.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 8.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 9.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 9.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 10.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 10.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 10.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 11.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 11.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 12.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 12.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 12.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 13.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 13.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 14.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 14.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 14.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 15.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 15.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 16.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 16.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 17.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 17.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 17.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 18.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 18.0 / 70.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:19
+   Active:
+     Time: 19.0 / -276706.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:19
+   Active: dummy 1
+     Time: 19.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:19
+   Active: dummy 1
+     Time: 19.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:20
+   Active: dummy 1
+     Time: 20.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:20
+   Active: dummy 1
+     Time: 20.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:21
+   Active: dummy 1
+     Time: 21.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:21
+   Active: dummy 1
+     Time: 21.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:21
+   Active: dummy 1
+     Time: 21.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:22
+   Active: dummy 1
+     Time: 22.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:22
+   Active: dummy 1
+     Time: 22.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:23
+   Active: dummy 1
+     Time: 23.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:23
+   Active: dummy 1
+     Time: 23.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:23
+   Active: dummy 1
+     Time: 23.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:24
+   Active: dummy 1
+     Time: 24.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:24
+   Active: dummy 1
+     Time: 24.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:25
+   Active: dummy 1
+     Time: 25.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:25
+   Active: dummy 1
+     Time: 25.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:25
+   Active: dummy 1
+     Time: 25.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:26
+   Active: dummy 1
+     Time: 26.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:26
+   Active: dummy 1
+     Time: 26.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:27
+   Active: dummy 1
+     Time: 27.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:27
+   Active: dummy 1
+     Time: 27.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:28
+   Active: dummy 1
+     Time: 28.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:28
+   Active: dummy 1
+     Time: 28.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:28
+   Active: dummy 1
+     Time: 28.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:29
+   Active: dummy 1
+     Time: 29.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:29
+   Active: dummy 1
+     Time: 29.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:30
+   Active: dummy 1
+     Time: 30.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:30
+   Active: dummy 1
+     Time: 30.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:30
+   Active: dummy 1
+     Time: 30.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:31
+   Active: dummy 1
+     Time: 31.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:31
+   Active: dummy 1
+     Time: 31.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:32
+   Active: dummy 1
+     Time: 32.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:32
+   Active: dummy 1
+     Time: 32.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:32
+   Active: dummy 1
+     Time: 32.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:33
+   Active: dummy 1
+     Time: 33.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:33
+   Active: dummy 1
+     Time: 33.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:34
+   Active: dummy 1
+     Time: 34.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:34
+   Active: dummy 1
+     Time: 34.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:34
+   Active: dummy 1
+     Time: 34.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:35
+   Active: dummy 1
+     Time: 35.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:35
+   Active: dummy 1
+     Time: 35.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:36
+   Active: dummy 1
+     Time: 36.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks  50%|████████████████                |  ETA: 0:00:36
+   Active: dummy 1
+     Time: 36.0 / 89.0 s
+
+
+
+
+
+
+Running benchmarks 100%|████████████████████████████████| Time: 0:00:36
+   Active:
+     Time: 36.0 / -276706.0 s
+
+
+
+
+
+Running benchmarks 100%|████████████████████████████████| Time: 0:00:36
+   Active:
+     Time: 36.0 / -276706.0 s
+Timestamp: 2026-10-27T18:51:40.557
+[ Info: Re-generating the folder with benchmarks
+┌ Info: Benchmarking groebner.
+│ Benchmark suite: dummy benchmark set
+│ Number of benchmark systems: 2
+│ Validate result: false
+│ Workers: 1
+│ Timeout: 60 + 10 seconds
+└ Aggregate results over 2 runs
+┌ Info: Benchmark systems:
+└ ["dummy 1", "dummy 2"]
+
+Benchmarking finished in 36.4 seconds.
+Benchmark results are written to /workspace/groebner-contribution/scripts/benchmark_different_software/results/groebner/benchmark_0
+
+[ Info: Skipping result validation for groebner
+
+┌ Info: Collecting results for groebner. Statistics of interest:
+└ 	total_time
+
+Benchmark results, groebner
+|  Model  | Total, s |
+|---------|----------|
+| dummy 1 |   0.00   |
+| dummy 2 |   0.00   |
+
+Table with results is written to /workspace/groebner-contribution/scripts/benchmark_different_software/results/groebner/benchmark_result_0.md

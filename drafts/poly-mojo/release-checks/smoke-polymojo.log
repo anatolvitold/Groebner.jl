@@ -1,0 +1,50 @@
+  Activating project at `/workspace/groebner-comparison/.local/environment`
+[ Info: Loading benchmark models..
+
+Running benchmarks   0%|                                |  ETA: N/A
+   Active: dummy 2
+     Time: 2.0 / 71.0 s
+
+
+
+
+
+
+Running benchmarks 100%|████████████████████████████████| Time: 0:00:02
+   Active:
+     Time: 3.0 / -276638.0 s
+
+
+
+
+
+Running benchmarks 100%|████████████████████████████████| Time: 0:00:02
+   Active:
+     Time: 3.0 / -276638.0 s
+Timestamp: 2026-10-27T18:50:29.404
+[ Info: Re-generating the folder with benchmarks
+┌ Info: Benchmarking polymojo.
+│ Benchmark suite: dummy benchmark set
+│ Number of benchmark systems: 2
+│ Validate result: false
+│ Workers: 1
+│ Timeout: 60 + 10 seconds
+└ Aggregate results over 2 runs
+┌ Info: Benchmark systems:
+└ ["dummy 1", "dummy 2"]
+
+Benchmarking finished in 2.7 seconds.
+Benchmark results are written to /workspace/groebner-contribution/scripts/benchmark_different_software/results/polymojo/benchmark_0
+
+[ Info: Skipping result validation for polymojo
+
+┌ Info: Collecting results for polymojo. Statistics of interest:
+└ 	total_time
+
+Benchmark results, polymojo
+|  Model  | Total, s |
+|---------|----------|
+| dummy 1 |   0.00   |
+| dummy 2 |   0.00   |
+
+Table with results is written to /workspace/groebner-contribution/scripts/benchmark_different_software/results/polymojo/benchmark_result_0.md
