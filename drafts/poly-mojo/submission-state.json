@@ -1,5 +1,5 @@
 {
-  "state": "ready-for-pr",
+  "state": "submitted",
   "fork": "anatolvitold/Groebner.jl",
   "code_branch": "feat/poly-mojo",
   "review_branch": "drafts/poly-mojo",
@@ -13,7 +13,7 @@
   "channel_pr": "https://github.com/modular/modular-community/pull/431",
   "channel_status": "poly_mojo 1.0.1 hb0f4dca_0 is published for linux-64",
   "checked_utc": "2026-10-27T18:53:49.505510+00:00",
-  "upstream_pr": null,
+  "upstream_pr": "https://github.com/sumiya11/Groebner.jl/pull/240",
   "code_commit": "a2b398491a72ec137f0fb61d216ca06dd27f642b",
   "focused_checks": {
     "passed_assertions": 74,
@@ -78,5 +78,6 @@
       "apn_mojo.mojoc": "53145dacd8b895ab3a6b3d9119a8121f44bc03e10978b68ebaa1feeb8b603965"
     }
   },
-  "released_driver_sha256": "cc1f2d869db34a080df9d4c335533100edf758c12831bf0c9ee7c375a7a207ca"
+  "released_driver_sha256": "cc1f2d869db34a080df9d4c335533100edf758c12831bf0c9ee7c375a7a207ca",
+  "submitted_utc": "2026-10-27T18:54:53.558985+00:00"
 }

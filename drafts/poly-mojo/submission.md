@@ -1,7 +1,7 @@
 # Submission status
 
 The owner authorized submission after community publication and installation
-checks. Both conditions are now met. The pinned environment and lockfile are on
+checks. Both conditions are met, and [Groebner.jl#240](https://github.com/sumiya11/Groebner.jl/pull/240) is open. The pinned environment and lockfile are on
 `feat/poly-mojo`; 74 focused checks and suite-0 smoke runs passed against the
 installed packages. No further approval is required.
 

@@ -1,6 +1,6 @@
 # Poly Mojo benchmark contribution
 
-**Status: published-package validation complete; ready for upstream submission.**
+**Status: submitted as [Groebner.jl#240](https://github.com/sumiya11/Groebner.jl/pull/240).**
 
 The implementation is on `feat/poly-mojo` in
 [`anatolvitold/Groebner.jl`](https://github.com/anatolvitold/Groebner.jl/tree/feat/poly-mojo).
@@ -13,8 +13,8 @@ upstream code diff.
 
 The owner has authorized submission after `poly_mojo==1.0.1` reaches the community
 channel and the pinned package passes fresh-installation checks. No additional
-approval is needed for that submission. No upstream Groebner.jl PR or issue has
-been opened.
+approval is needed for that submission. The contribution is now open as [Groebner.jl#240](https://github.com/sumiya11/Groebner.jl/pull/240).
+No separate fingerprint issue has been submitted.
 
 - [PR title](title.txt) and [PR description](pull-request.md)
 - [Validation record](validation.md)

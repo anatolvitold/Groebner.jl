@@ -12,7 +12,7 @@ All 86 upstream problems in suites 1–3 were attempted with four backends (344 
 - Timings are seconds, minimum of three repetitions. Julia and Poly Mojo perform one untimed warm-up. Conversion/loading and output are outside their compute timing. The unchanged msolve timing wraps each fresh executable, including startup, input parsing, and output; this particularly affects very small cases.
 - Poly Mojo uses ordinary mode (`certify=False`, `trace=False`). The certified backend is excluded.
 - After all timed passes, every completed output is parsed with Nemo and compared across backends using all coefficients and monomials, allowing basis permutation and nonzero scalar normalization to monic form. Canonical SHA-256 covers the complete normalized basis, field, and variable order. This is cross-implementation agreement; it is not a substitute for a proof certificate.
-- Local runner compatibility/resource changes and scripts are retained here; the clean contribution and local PR draft are unchanged. No PR or issue was published.
+- Local runner compatibility/resource changes and scripts are retained here; the clean contribution and local PR draft are unchanged. No PR or issue was published as part of that benchmark run.
 
 ## Completion counts
 
