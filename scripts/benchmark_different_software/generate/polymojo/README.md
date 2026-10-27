@@ -7,10 +7,18 @@ The bridge calls the public `polynomials.groebner` API directly.
 
 ## Prepare the environment
 
-Use an activated environment containing **Mojo 1.2.0**, Python 3.11+, and the
-precompiled `poly_mojo` package with its matching `apn_mojo` dependency. Pin the
-exact package release in that environment. These dependencies are only needed
-when selecting a Poly Mojo backend.
+The [pinned Pixi environment](environment/pixi.toml) installs the published
+community-channel **Poly Mojo 1.0.1** and **APN Mojo 1.0.2** packages with
+**Mojo 1.2.0** and Python 3.12 on Linux x86-64. The lockfile records the exact
+dependency builds. From the repository root:
+
+```sh
+pixi install --locked --manifest-path scripts/benchmark_different_software/generate/polymojo/environment/pixi.toml
+eval "$(pixi shell-hook --manifest-path scripts/benchmark_different_software/generate/polymojo/environment/pixi.toml --shell bash)"
+```
+
+These dependencies are only needed when selecting a Poly Mojo backend. The
+packages are installed precompiled; no library source build is needed.
 
 During development, a source build can be supplied with `POLY_MOJO_PATH` pointing
 to its precompiled package directory. The bridge never builds the library itself.

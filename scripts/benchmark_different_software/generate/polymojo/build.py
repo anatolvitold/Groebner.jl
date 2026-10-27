@@ -12,7 +12,7 @@ import subprocess
 import sys
 import tempfile
 
-SOURCE = Path(__file__).with_name("driver.mojo")
+SOURCE = Path(__file__).resolve().with_name("driver.mojo")
 PACKAGES = ("apn_mojo.mojoc", "polynomials.mojoc")
 
 

@@ -59,6 +59,24 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(self.prepare(), first)
         self.assertEqual(self.count(), 1)
 
+    def test_relative_cli_path_reuses_default_cache(self):
+        checkout = self.root / "checkout"
+        folder = checkout / "generate" / "polymojo"
+        environment = folder / "environment"
+        environment.mkdir(parents=True)
+        helper = folder / "build.py"
+        helper.write_bytes(Path(build.__file__).read_bytes())
+        (folder / "driver.mojo").write_bytes(self.source.read_bytes())
+        first = subprocess.check_output(
+            [sys.executable, str(helper)], cwd=checkout, env=self.env, text=True
+        ).strip()
+        second = subprocess.check_output(
+            [sys.executable, "../build.py"], cwd=environment, env=self.env, text=True
+        ).strip()
+        self.assertEqual(first, second)
+        self.assertEqual(Path(first).parents[2], checkout / "results")
+        self.assertEqual(self.count(), 1)
+
     def test_concurrent_setup_compiles_once(self):
         with ThreadPoolExecutor(max_workers=2) as pool:
             binaries = list(pool.map(lambda _: self.prepare(), range(2)))
