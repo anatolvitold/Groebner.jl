@@ -12,7 +12,7 @@
   "authorization_condition": "After community-channel publication, pin the released package, verify a fresh installation, and submit the PR. No further approval requested.",
   "channel_pr": "https://github.com/modular/modular-community/pull/431",
   "channel_status": "poly_mojo 1.0.1 hb0f4dca_0 is published for linux-64",
-  "checked_utc": "2026-10-27T18:53:49.505510+00:00",
+  "checked_utc": "2026-10-27T19:10:37.962486+00:00",
   "upstream_pr": "https://github.com/sumiya11/Groebner.jl/pull/240",
   "code_commit": "a2b398491a72ec137f0fb61d216ca06dd27f642b",
   "focused_checks": {
@@ -79,5 +79,16 @@
     }
   },
   "released_driver_sha256": "cc1f2d869db34a080df9d4c335533100edf758c12831bf0c9ee7c375a7a207ca",
-  "submitted_utc": "2026-10-27T18:54:53.558985+00:00"
+  "submitted_utc": "2026-10-27T18:54:53.558985+00:00",
+  "pr_review": {
+    "description": "corrected and verified",
+    "code_commit_unchanged": true,
+    "review_comments": 0,
+    "reviews": 0,
+    "ci_workflows": 6,
+    "ci_status": "action_required",
+    "ci_note": "Fork workflows require maintainer approval; no jobs or check runs have started.",
+    "quick_start_shell_syntax": "passed",
+    "pr_updated_at": "2026-10-27T19:10:21Z"
+  }
 }

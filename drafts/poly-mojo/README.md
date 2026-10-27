@@ -54,3 +54,14 @@ The [release validation records](release-checks/) are separate from the earlier
 source-based benchmark results, which were not rerun for this packaging step.
 
 Commits use Anatoly Vitold Stankyavichyus `<anatolyvitold@outlook.com>`.
+
+## PR description and CI
+
+The submitted description was checked against the code and corrected to include
+the shared Julia environment setup, a complete Quick Start code block, and an
+accurate account of the compatibility fixes. The saved [PR description](pull-request.md)
+matches the live PR. The validated code commit is unchanged.
+
+At this check, all six upstream workflows reported `action_required`, with no
+jobs started; maintainer approval is needed to run fork workflows. No review
+comments or formal reviews had been posted.
