@@ -8,7 +8,7 @@ The bridge calls the public `polynomials.groebner` API directly.
 ## Prepare the environment
 
 The [pinned Pixi environment](environment/pixi.toml) installs the published
-community-channel **Poly Mojo 1.0.1** and **APN Mojo 1.0.2** packages with
+community-channel **Poly Mojo 1.0.2** and **APN Mojo 1.0.2** packages with
 **Mojo 1.2.0** and Python 3.12 on Linux x86-64. The lockfile records the exact
 dependency builds. From the repository root:
 
